@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>mobile – JULIEWATTZ</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<link href="./mwattz.png" rel="icon" type="image/png"><link href="./mwattz_apple.png" rel="apple-touch-icon">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-f418161beb48e0141c760e455f12af2c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-b0878a98f7b4bd22dcdc03e6df5bb4f2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dark-b0878a98f7b4bd22dcdc03e6df5bb4f2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b0878a98f7b4bd22dcdc03e6df5bb4f2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="site_libs/quarto-dashboard/stickythead.js"></script>
+
+
+
+<script src="site_libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="site_libs/quarto-dashboard/components.js"></script>
+
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.12.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body class="quarto-dashboard nav-fixed dashboard-fill fullcontent quarto-light">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">JULIEWATTZ</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./running.html"> 
+<span class="menu-text">Running</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./walking.html"> 
+<span class="menu-text">Walking</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./cycling.html"> 
+<span class="menu-text">Cycling</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./indoor.html"> 
+<span class="menu-text">Indoor</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./swimming.html"> 
+<span class="menu-text">Swimming</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text"><i>Last update: 30/03/26 at 23:14</i></span>
+    </span>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.github.com"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.github.com"> <i class="bi bi-cup-hot-fill" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark" style="opacity: 0.85;">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler hidden" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
+
+
+</div></nav>
+</header></header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-layout-custom page-navbar quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+<!-- main -->
+
+<div class="bslib-grid-item html-fill-item bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-a7d9776eea636af4b884" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-a7d9776eea636af4b884">{"x":{"visdat":{"1a9839ccb43":["function () ","plotlyVisDat"]},"cur_data":"1a9839ccb43","attrs":{"1a9839ccb43":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"values":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"labels":["slice_1","slice_2","slice_3","slice_4","slice_5","slice_6","slice_7","slice_8","slice_9","slice_10","slice_11","slice_12","slice_13","slice_14","slice_15","slice_16","slice_17","slice_18","slice_19","slice_20","slice_21","slice_22","slice_23","slice_24","slice_25","slice_26","slice_27","slice_28","slice_29","slice_30","slice_31","slice_32","slice_33","slice_34","slice_35","slice_36","slice_37","slice_38","slice_39","slice_40","slice_41","slice_42","slice_43","slice_44","slice_45","slice_46","slice_47","slice_48","slice_49","slice_50","slice_51","slice_52","slice_53","slice_54","slice_55","slice_56","slice_57","slice_58","slice_59","slice_60","slice_61","slice_62","slice_63","slice_64","slice_65","slice_66","slice_67","slice_68","slice_69","slice_70","slice_71","slice_72","slice_73","slice_74","slice_75","slice_76","slice_77","slice_78","slice_79","slice_80","slice_81","slice_82","slice_83","slice_84","slice_85","slice_86","slice_87","slice_88","slice_89","slice_90","slice_91","slice_92","slice_93","slice_94","slice_95","slice_96","slice_97","slice_98","slice_99","slice_100"],"type":"pie","hole":0.59999999999999998,"sort":false,"direction":"clockwise","marker":{"colors":["#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A"],"line":{"width":0}},"textinfo":"none","hoverinfo":"skip","showlegend":false,"domain":{"x":[0,1]},"inherit":true},"1a9839ccb43.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"values":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"labels":["slice_1","slice_2","slice_3","slice_4","slice_5","slice_6","slice_7","slice_8","slice_9","slice_10","slice_11","slice_12","slice_13","slice_14","slice_15","slice_16","slice_17","slice_18","slice_19","slice_20","slice_21","slice_22","slice_23","slice_24","slice_25","slice_26","slice_27","slice_28","slice_29","slice_30","slice_31","slice_32","slice_33","slice_34","slice_35","slice_36","slice_37","slice_38","slice_39","slice_40","slice_41","slice_42","slice_43","slice_44","slice_45","slice_46","slice_47","slice_48","slice_49","slice_50","slice_51","slice_52","slice_53","slice_54","slice_55","slice_56","slice_57","slice_58","slice_59","slice_60","slice_61","slice_62","slice_63","slice_64","slice_65","slice_66","slice_67","slice_68","slice_69","slice_70","slice_71","slice_72","slice_73","slice_74","slice_75","slice_76","slice_77","slice_78","slice_79","slice_80","slice_81","slice_82","slice_83","slice_84","slice_85","slice_86","slice_87","slice_88","slice_89","slice_90","slice_91","slice_92","slice_93","slice_94","slice_95","slice_96","slice_97","slice_98","slice_99","slice_100"],"type":"pie","hole":0.59999999999999998,"sort":false,"direction":"clockwise","marker":{"colors":["#90EE90","#93EE8B","#96EF87","#9AEF82","#9DF07E","#A0F07A","#A4F175","#A7F171","#AAF26D","#AEF268","#B1F364","#B5F360","#B8F45B","#BBF457","#BFF552","#C2F54E","#C5F64A","#C9F645","#CCF741","#CFF73D","#D3F838","#D6F834","#DAF92F","#DDF92B","#E0FA27","#E4FA22","#E7FB1E","#EAFB1A","#EEFC15","#F1FC11","#F4FD0D","#F8FD08","#FBFE04","#FFFE00","#FFF700","#FFEF00","#FFE700","#FFE000","#FFD800","#FFD000","#FFC800","#FFC100","#FFB900","#FFB100","#FFA900","#FFA200","#FF9A00","#FF9200","#FF8B00","#FF8300","#FF7B00","#FF7300","#FF6C00","#FF6400","#FF5C00","#FF5400","#FF4D00","#FF4500","#FF3D00","#FF3600","#FF2E00","#FF2600","#FF1E00","#FF1700","#FF0F00","#FF0700","#FE0000","#FB0000","#F70000","#F40000","#F00000","#ED0000","#E90000","#E60000","#E20000","#DF0000","#DB0000","#D80000","#D40000","#D10000","#CD0000","#CA0000","#C60000","#C30000","#BF0000","#BC0000","#B80000","#B50000","#B10000","#AE0000","#AA0000","#A70000","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)"],"line":{"width":0}},"textinfo":"none","hoverinfo":"skip","showlegend":false,"domain":{"x":[0,1]},"inherit":true}},"layout":{"margin":{"b":0,"l":0,"t":0,"r":0},"paper_bgcolor":"#2d2d2d","plot_bgcolor":"#2d2d2d","annotations":[{"x":0.5,"y":0.5,"text":"<span style='color:#FFFFFF; font-size: 14px'>1.48<\/span><br><span style='color:#FFFFFF; font-size: 15px'><b>ACWR<\/b><\/span>","showarrow":false}],"font":{"color":"white"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":false,"staticPlot":false},"data":[{"values":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"labels":["slice_1","slice_2","slice_3","slice_4","slice_5","slice_6","slice_7","slice_8","slice_9","slice_10","slice_11","slice_12","slice_13","slice_14","slice_15","slice_16","slice_17","slice_18","slice_19","slice_20","slice_21","slice_22","slice_23","slice_24","slice_25","slice_26","slice_27","slice_28","slice_29","slice_30","slice_31","slice_32","slice_33","slice_34","slice_35","slice_36","slice_37","slice_38","slice_39","slice_40","slice_41","slice_42","slice_43","slice_44","slice_45","slice_46","slice_47","slice_48","slice_49","slice_50","slice_51","slice_52","slice_53","slice_54","slice_55","slice_56","slice_57","slice_58","slice_59","slice_60","slice_61","slice_62","slice_63","slice_64","slice_65","slice_66","slice_67","slice_68","slice_69","slice_70","slice_71","slice_72","slice_73","slice_74","slice_75","slice_76","slice_77","slice_78","slice_79","slice_80","slice_81","slice_82","slice_83","slice_84","slice_85","slice_86","slice_87","slice_88","slice_89","slice_90","slice_91","slice_92","slice_93","slice_94","slice_95","slice_96","slice_97","slice_98","slice_99","slice_100"],"type":"pie","hole":0.59999999999999998,"sort":false,"direction":"clockwise","marker":{"color":"rgba(31,119,180,1)","colors":["#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A","#0000001A"],"line":{"color":"rgba(45,45,45,1)","width":0}},"textinfo":"none","hoverinfo":["skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip"],"showlegend":false,"domain":{"x":[0,1]},"frame":null},{"values":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"labels":["slice_1","slice_2","slice_3","slice_4","slice_5","slice_6","slice_7","slice_8","slice_9","slice_10","slice_11","slice_12","slice_13","slice_14","slice_15","slice_16","slice_17","slice_18","slice_19","slice_20","slice_21","slice_22","slice_23","slice_24","slice_25","slice_26","slice_27","slice_28","slice_29","slice_30","slice_31","slice_32","slice_33","slice_34","slice_35","slice_36","slice_37","slice_38","slice_39","slice_40","slice_41","slice_42","slice_43","slice_44","slice_45","slice_46","slice_47","slice_48","slice_49","slice_50","slice_51","slice_52","slice_53","slice_54","slice_55","slice_56","slice_57","slice_58","slice_59","slice_60","slice_61","slice_62","slice_63","slice_64","slice_65","slice_66","slice_67","slice_68","slice_69","slice_70","slice_71","slice_72","slice_73","slice_74","slice_75","slice_76","slice_77","slice_78","slice_79","slice_80","slice_81","slice_82","slice_83","slice_84","slice_85","slice_86","slice_87","slice_88","slice_89","slice_90","slice_91","slice_92","slice_93","slice_94","slice_95","slice_96","slice_97","slice_98","slice_99","slice_100"],"type":"pie","hole":0.59999999999999998,"sort":false,"direction":"clockwise","marker":{"color":"rgba(255,127,14,1)","colors":["#90EE90","#93EE8B","#96EF87","#9AEF82","#9DF07E","#A0F07A","#A4F175","#A7F171","#AAF26D","#AEF268","#B1F364","#B5F360","#B8F45B","#BBF457","#BFF552","#C2F54E","#C5F64A","#C9F645","#CCF741","#CFF73D","#D3F838","#D6F834","#DAF92F","#DDF92B","#E0FA27","#E4FA22","#E7FB1E","#EAFB1A","#EEFC15","#F1FC11","#F4FD0D","#F8FD08","#FBFE04","#FFFE00","#FFF700","#FFEF00","#FFE700","#FFE000","#FFD800","#FFD000","#FFC800","#FFC100","#FFB900","#FFB100","#FFA900","#FFA200","#FF9A00","#FF9200","#FF8B00","#FF8300","#FF7B00","#FF7300","#FF6C00","#FF6400","#FF5C00","#FF5400","#FF4D00","#FF4500","#FF3D00","#FF3600","#FF2E00","#FF2600","#FF1E00","#FF1700","#FF0F00","#FF0700","#FE0000","#FB0000","#F70000","#F40000","#F00000","#ED0000","#E90000","#E60000","#E20000","#DF0000","#DB0000","#D80000","#D40000","#D10000","#CD0000","#CA0000","#C60000","#C30000","#BF0000","#BC0000","#B80000","#B50000","#B10000","#AE0000","#AA0000","#A70000","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)","rgba(0,0,0,0)"],"line":{"color":"rgba(45,45,45,1)","width":0}},"textinfo":"none","hoverinfo":["skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip","skip"],"showlegend":false,"domain":{"x":[0,1]},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container" style="padding: 0px;">
+<div style="padding: 8px;" class="html-fill-item html-fill-container">
+<p><button onclick="copyAndOpen1()" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'" style="width:100%; height:100%; cursor:pointer;
+           background: linear-gradient(135deg, #ff7b2c, #9b1a0a);
+           color:white; border:none; border-radius:4px; padding:8px; font-size:0.8rem;"> Training Load Analysis </button></p>
+</div>
+<script>
+function copyAndOpen1() {
+  var text = "Today is Monday Mar 30.\nYesterday was Sunday Mar 29.\nThe day before yesterday was Saturday Mar 28.\nTomorrow is Tuesday Mar 31.\nThe day after tomorrow is Wednesday Apr 1.\nCurrent time (Belgium, CET/CEST): 2026-03-30 23:11:52.\n\n================================================================================\nROLE\n================================================================================\nYou are a data-driven sport scientist and endurance coach working with a single\nathlete. Your job is to deliver a precise, evidence-based analysis. Analyse\ncritically and without bias. Do not soften conclusions. Be concise but specific\n— no generic advice, no filler.\n\n================================================================================\nATHLETE PROFILE\n================================================================================\nSex: Female | Age: 31\nWeight: 60 kg | Height: 164 cm\nMax HR: 187 bpm | Resting HR: 59 bpm\n\n================================================================================\nHEART RATE ZONES ← DO NOT RECALCULATE\n================================================================================\nZ1: 123–136 bpm   (very light / active recovery)\nZ2: 136–149 bpm   (aerobic base)\nZ3: 149–161 bpm   (tempo)\nZ4: 161–174 bpm   (threshold)\nZ5: 174+ bpm            (VO2max / neuromuscular)\n\n================================================================================\nTRAINING CONTEXT\n================================================================================\nPrimary goal: improve general endurance and HR efficiency across all three sports\n\nIndoor cycling FTP (Zwift, indoor only): 201 W\nOutdoor cycling FTP: no power meter → use HR + speed as proxies\n\nInjury constraint — HALLUX RIGIDUS (right foot, chronic):\n  - Degenerative joint disease of the right big toe; limits dorsiflexion\n  - Running load MUST be progressive and conservative\n  - Avoid explosive toe-off, steep hills, hard surfaces when fatigued\n  - Err on the side of doing less, not more, for running volume\n\nActivity type clarification — WALK:\n  - A brisk, purposeful walk targeting Z1–Z2 HR (NOT a casual stroll)\n  - Used as a low-mechanical-load aerobic stimulus: engages the aerobic energy\n    system and keeps running-related muscles and tendons active between run days\n  - Minimal stress on the hallux rigidus compared to running\n  - Count it as a legitimate training session for aerobic base and load\n  - Do NOT treat walks as running days\n  - Do NOT treat walks as rest days or ignore them in fatigue calculations\n  \nActivity type clarification — INDOOR:\n  - Indoor cycling session using Zwift/MyWoosh\n  - Used as an alternative to outdoor cycling\n  - General seasonal rule:\n      - March–October: outdoor cycling is priority\n      - November–February: indoor (Zwift) cycling is priority\n  - Do NOT recommend RIDE / INDOOR outside respective seasons\n\n================================================================================\nSCHEDULE CONSTRAINTS ← HARD RULES\n================================================================================\nPer calendar week (monday through sunday):\n  - Max 3 run sessions\n  - Max 2 brisk walk sessions\n  - Max 4 sum of run and brisk walk sessions\n  - Max 2 cycling/indoor sessions\n  - Max 1 swim session  (only possible to swim on Tuesday, Thursday, Friday; but dont force a swim just because it is Tuesday, Thursday or Friday)\n\nOnly one swimming session is possible, do not dwell on it. It is non-negotionable.\nNo swimming other than on Tuesday, Thursday or Friday, do not dwell on it. It is non-negotionable.\n\nRolling 7-day window:\n  - Max 5 training sessions total ← CRITICAL, never exceed\n\nSport spacing:\n  - At least 2 days between sessions of the same sport type ← CRITICAL, never back-to-back\n\nRotation principle:\n  - Distribute across run, ride, and swim where possible\n  - E.g. run -> ride/indoor -> swim -> run or run -> swim -> ride/indoor -> run\n  - Walk can occur enywhere in between (even two days in a row)\n  - No run after a walk (but a walk after a run is possible)\n  - Avoid stacking the same sport on consecutive days\n\n================================================================================\nDATASETS  (pasted inline below)\n================================================================================\nYou will receive 4 datasets:\n\nDATASET 1 — WORKOUT LOG\nMost recent 25 sessions per sport type.\nColumns: Date | Sport | Distance | Time | Speed | Trimp | Heartrate | Z1(%) | Z2(%) | Z3(%) | Z4(%) | Z5(%)\n\nSport values: Run, Ride, Swim, Indoor, Walk\n  - Indoor = Zwift indoor cycling (see context above)\n  - Walk = brisk Z1–Z2 aerobic walk (see context above)\n\n---\n\nDATASET 2 — DAILY TRAINING LOAD\nColumns: date | time(s) | ATL | CTL | ACWR | trimp\n\n---\n\nDATASET 3 — EXPECTED TRIMP / ACWR LOOKUP TABLE\nProjected values for different HR × duration combinations for today and\nupcoming days. Use this to calibrate session recommendations.\nColumns: date | avg_hr | time_min | expected_trimp | expected_acwr\n\n---\n\nDATASET 4 — LAST WORKOUT SESSION\nSummary of last workout, used for post-workout analysis, with splits per decile.\nColumns: id(sport type) | date | variable | pct_10 | pct_20 | pct_30 | pct_40 | pct_50 | pct_60 | pct_70 | pct_80 | pct_90 | pct_100\nVariable values include: time_seconds, distance_meters, hr_avg, hr_max, pct_in_hr1, pct_in_hr2, pct_in_hr3, pct_in_hr4, pct_in_hr5, speed (format depending on sport type)\n\n================================================================================\nTRIMP FORMULA (reference)\n================================================================================\nTRIMP = duration_min × HRr × 0.64 × e^(1.92 × HRr)\n  where HRr = (HR_avg − HR_rest) / (HR_max − HR_rest)\n\n================================================================================\nACWR THRESHOLDS  ← ABSOLUTE, DO NOT REINTERPRET\n================================================================================\n< 0.80 → detraining / underloading\n0.80–1.30 → optimal training zone\n1.30–1.50 → elevated fatigue risk\n> 1.50 → high injury / overtraining risk\n\n================================================================================\nANALYSIS RULES\n================================================================================\n- Focus on patterns and trends, not individual sessions\n- Ignore truly trivial entries in the DAILY TRAINING LOAD DATASET (e.g. sub-10-min Apple Watch auto-detects with no meaningful HR data); do NOT ignore walks that show real Z1–Z2 HR data\n- Primary lens: last 7 / 14 / 28 days; anchor to longer baseline where relevant\n- Be critical when the data warrants it\n- Be optimistic when the data allows it\n- Do NOT narrate your reasoning process\n- Do NOT recalculate zones or ACWR thresholds\n\n================================================================================\nTIMING RULE FOR RECOMMENDATION\n================================================================================\nAdress dates/time absolutely correct:\nCurrent Belgium date and time is given at the top of this prompt.\nBe sure that when mentioning \"yesterday\" this means the current date minus 1.\nBe sure that when mentioning \"today\" this means the current date.\nBe sure that when mentioning \"tomorrow\" this means the current date plus 1.\nApply this to all datasets shared with you.\n\n- If a structured workout is already recorded TODAY in Dataset 1 → Recommend for TOMORROW; use tomorrow's starting ACWR from Dataset 2\n- If current time > 20:00 Belgium AND no workout recorded today → Recommend for TOMORROW; use tomorrow's starting ACWR from Dataset 2\n- Otherwise → Recommend for TODAY\n\nDo NOT assume rest is required just because no session is logged yet today.\nDo NOT assume rest is required just because a non-zero TRIMP is logged today (this may be non-structured activity; check with Dataset 1).\nDo NOT assume a workout is possible tomorrow if it is not possible today.\nBase the recommendation on load, fatigue, and trends.\n\n================================================================================\nVISUALIZATION COLOR SCHEME\n================================================================================\nWhen visualizing, I use the following color-coding:\n  Run    = #e91e8c\n  Walk   = #c9a7e0\n  Ride   = #f9c8a0\n  Indoor = #4f8fff\n  Swim   = #a8e86e\n  \nFor all other visualizations, use a nice blue palette color scheme.\n\n================================================================================\nOUTPUT  (follow this structure exactly; use these headings)\n================================================================================\nGIVE ONLY THE FOLLOWING OUTPUT (IN ORDER).\nNEVER REPORT YOUR THINKING PROCESS/PREPARATIONS LEADING UP TO ONE THE FOLLOWING OUPUT REQUESTS.\n\n## 1. Current Training Status\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nSingle crisp summary: fitness level (CTL trend), fatigue (ATL), readiness.\nUse specific numbers.\nMax 2-4 sentences (depending on need), one paragraph, limit amount of numbers.\nEnd with an insightful graph when it reveals something that prose cannot convey clearly.\n\n## 2. Load Analysis — 7 / 14 / 28 Days\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nCompare recent load to baseline. Call out spikes, gaps, or imbalances explicitly.\nMax 2-4 sentences (depending on need), one paragraph, limit amount of numbers.\nEnd with an insightful graph when it reveals something that prose cannot convey clearly.\n\n## 3. Intensity Distribution\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nHow is load split across Z1–Z5? Is the polarisation correct?\nFlag if tempo/threshold (Z3–Z4) is crowding out base work, or vice versa.\nMax 2-4 sentences (depending on need), one paragraph, limit amount of numbers.\nEnd with mandatory graph: stacked barchart - x-axis: run, ride/indoor, swim, walk, y-axis: percentage in HR zones, legend/color: HR-zones\n\n## 4. Injury & Overtraining Risk\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nACWR value + interpretation. Call out any concerning patterns in run load\nor impact on the hallux rigidus. Note walk load separately if relevant.\nMax 2-4 sentences (depending on need), one paragraph, limit amount of numbers.\n\n## 5. Efficiency Trends\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nPer sport type: subtitle, max 2-3 sentences, one paragraph, limit amount of numbers.\nRunning: pace/HR or pace at given HR over time.\nCycling: speed/HR (outdoor) or power/HR (indoor).\nSwimming: pace/HR.\nOnly comment on sports with sufficient recent data (≥3 sessions).\n\n## 6. Strengths\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nWhat is working well? Be specific and evidence-based.\nMax 2-4 sentences (depending on need), one paragraph, limit amount of numbers.\n\n## 7. Weaknesses\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nWhat is underperforming or missing? Be direct.\nMax 2-4 sentences (depending on need), one paragraph, limit amount of numbers.\n\n## 8. Next Session Recommendation\nFor each of the active (based on recent activity data) sport types (run, walk, ride/indoor, swim)\nGive a short recommendation for each sport type\n\nSummary/conclusion as subtitle for each sport type: state Sport | Recommended Y/N | Duration | General intensity | Purpose\n\n- Match session to current fatigue + ACWR + injury risk\n- Use the expected TRIMP/ACWR dataset as a point of reference\n- Avoid repeating the dominant recent stimulus\n\nSession types available:\n  Recovery | Aerobic base | Long slow distance | Tempo/threshold |\n  VO2max intervals | Neuromuscular (sprints/strides) |\n  Technique (swim) | Mixed aerobic + accelerations |\n  Brisk walk (Z1–Z2, low-impact aerobic)\n\nInclude WHY this session is appropriate given the current load context.\nWhen stating a post-session ACWR, you MUST quote the exact row from Dataset 3 used: \ndate | avg_hr | time_min | expected_acwr. No interpolation, no rounding in this part.\nIf no exact row matches the recommendation, pick the nearest row and state it is approximate.\nSession duration and target HR must match an existing row in Dataset 3. Do not recommend combinations that fall between rows.\nBefore finalising the ACWR figure, re-read the exact Dataset 3 row one more time and confirm it matches the recommended duration and HR exactly.\nMax 2 sentences (depending on need), one paragraph, limit amount of numbers.\n\n## 9. Focus for the Next 3–6 Weeks\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\n2-3 paragraphs with subtitle.\nSpecific, actionable, grounded in the data trends above.\nNo platitudes.\nMax 2 sentences per paragraph.\n\n## 10. Summary for training suggestion prompt\nSummarize the analysis from parts 1 to 9 to be used by me in another prompt.\nStart the summary with: \"In an earlier analysis, you recommended ...\".\nAgain, specific, actionable, grounded in the data trends above.\n1 paragraphs, max 6 sentences.\nMake it so that I can easily copy-paste this summary in another prompt (e.g. like a code block).\n\n================================================================================\nTONE\n================================================================================\nDirect. Precise. Calm. Challenge weak patterns without drama or insults. Be\npositive, but no cheerleading. No filler sentences. Very simple English\ntargeting a non-English speaker. Every claim must be absolutely traceable to\nthe data (!!!).\n\n================================================================================\nSTART\n================================================================================\nAlways (!) start with these check-in questions with interactive multiple choice:\n- To what extent do you feel tired/fatigued?\n- Any current health/stifness condition (minor cold, hallux rigidus, muscle soreness, other) I should be aware of?\n- Do you have a specific training goal or race within the next 2 months (general fitness improvement, local event, race)?\nUse this info in your analysis!\n\nHere is the data structure and the dataset:\n\ndate\ttype\tdistance\ttime\thr\thr_max\tspeed\tpace\ttrimp\n2026-03-30 (Today)\tRun\t2260\t1173\t131\t156\t6.9\t8.65\t24\n2026-03-28 (The day before yesterday)\tNo structured workout\tNA\tNA\tNA\tNA\tNA\tNA\tNA\n2026-03-29 (Yesterday)\tNo structured workout\tNA\tNA\tNA\tNA\tNA\tNA\tNA\n\nHere is an overview of my 6-week training load:\n\ndate\tstatus\ttrimp\ttime\tATL\tCTL\tACWR\n2026-02-16\tRest day\t0\t0\t3\t3\t1.18\n2026-02-17\tRest day\t0\t0\t3\t2\t1.05\n2026-02-18\tRest day\t0\t0\t2\t2\t0.93\n2026-02-19\tRest day\t26\t1636\t5\t3\t1.82\n2026-02-20\tRest day\t0\t0\t5\t3\t1.62\n2026-02-21\tRest day\t0\t0\t4\t3\t1.43\n2026-02-22\tRest day\t0\t0\t4\t3\t1.27\n2026-02-23\tRest day\t0\t0\t3\t3\t1.13\n2026-02-24\tRest day\t4\t365\t3\t3\t1.17\n2026-02-25\tRest day\t15\t743\t5\t3\t1.57\n2026-02-26\tRest day\t21\t748\t7\t3\t2\n2026-02-27\tRest day\t0\t0\t6\t3\t1.77\n2026-02-28\tRest day\t0\t0\t5\t3\t1.57\n2026-03-01\tRest day\t0\t0\t5\t3\t1.4\n2026-03-02\tRest day\t0\t0\t4\t3\t1.24\n2026-03-03\tRest day\t0\t0\t3\t3\t1.1\n2026-03-04\tRest day\t19\t1995\t6\t3\t1.6\n2026-03-05\tRest day\t20\t1134\t7\t4\t1.94\n2026-03-06\tRest day\t19\t876\t9\t4\t2.14\n2026-03-07\tRest day\t0\t0\t8\t4\t1.9\n2026-03-08\tRest day\t0\t0\t7\t4\t1.69\n2026-03-09\tRest day\t0\t0\t6\t4\t1.5\n2026-03-10\tRest day\t0\t0\t5\t4\t1.33\n2026-03-11\tRest day\t0\t0\t4\t4\t1.18\n2026-03-12\tRest day\t27\t934\t7\t4\t1.73\n2026-03-13\tRest day\t0\t0\t6\t4\t1.54\n2026-03-14\tRest day\t11\t1843\t7\t4\t1.62\n2026-03-15\tRest day\t8\t1133\t7\t4\t1.62\n2026-03-16\tRest day\t0\t0\t6\t4\t1.44\n2026-03-17\tRest day\t11\t549\t7\t4\t1.53\n2026-03-18\tRest day\t0\t0\t6\t4\t1.36\n2026-03-19\tRest day\t0\t0\t5\t4\t1.21\n2026-03-20\tRest day\t24\t1187\t8\t5\t1.62\n2026-03-21\tRest day\t0\t0\t7\t5\t1.44\n2026-03-22\tRest day\t0\t0\t6\t5\t1.28\n2026-03-23\tRest day\t0\t0\t5\t4\t1.14\n2026-03-24\tRest day\t0\t0\t4\t4\t1.01\n2026-03-25\tRest day\t0\t0\t4\t4\t0.9\n2026-03-26\tRest day\t0\t0\t3\t4\t0.79\n2026-03-27\tRest day\t16\t740\t5\t4\t1.13\n2026-03-28 (The day before yesterday)\tRest day\t7\t1025\t5\t4\t1.17\n2026-03-29 (Yesterday)\tRest day\t0\t0\t5\t4\t1.04\n2026-03-30 (Today)\tWorkout done\t24\t1173\t7\t5\t1.48\n2026-03-31 (Tomorrow)\tNo workout planned yet\t0\t0\t6\t5\t1.31\n2026-04-01 (The day after tomorrow)\tNo workout planned yet\t0\t0\t5\t5\t1.17\n\nHere is an overview of the expected trimp and ACWR values for different combinations of HR and time for today and the coming days:\n\ndate\tavg_hr\ttime_min\texpected_trimp\texpected_acwr\n2026-03-30 (Today)\t122\t30\t29\t2\n2026-03-30 (Today)\t128\t30\t34\t2.08\n2026-03-30 (Today)\t134\t30\t40\t2.17\n2026-03-30 (Today)\t140\t30\t47\t2.26\n2026-03-30 (Today)\t146\t30\t55\t2.36\n2026-03-30 (Today)\t152\t30\t63\t2.47\n2026-03-30 (Today)\t158\t30\t73\t2.58\n2026-03-30 (Today)\t164\t30\t83\t2.69\n2026-03-30 (Today)\t170\t30\t95\t2.81\n2026-03-30 (Today)\t122\t40\t39\t2.14\n2026-03-30 (Today)\t128\t40\t46\t2.24\n2026-03-30 (Today)\t134\t40\t54\t2.35\n2026-03-30 (Today)\t140\t40\t63\t2.46\n2026-03-30 (Today)\t146\t40\t73\t2.58\n2026-03-30 (Today)\t152\t40\t84\t2.7\n2026-03-30 (Today)\t158\t40\t97\t2.82\n2026-03-30 (Today)\t164\t40\t111\t2.95\n2026-03-30 (Today)\t170\t40\t127\t3.08\n2026-03-30 (Today)\t122\t50\t48\t2.28\n2026-03-30 (Today)\t128\t50\t57\t2.39\n2026-03-30 (Today)\t134\t50\t67\t2.51\n2026-03-30 (Today)\t140\t50\t78\t2.64\n2026-03-30 (Today)\t146\t50\t91\t2.77\n2026-03-30 (Today)\t152\t50\t105\t2.9\n2026-03-30 (Today)\t158\t50\t121\t3.03\n2026-03-30 (Today)\t164\t50\t139\t3.17\n2026-03-30 (Today)\t170\t50\t159\t3.31\n2026-03-30 (Today)\t122\t60\t58\t2.4\n2026-03-30 (Today)\t128\t60\t68\t2.53\n2026-03-30 (Today)\t134\t60\t80\t2.66\n2026-03-30 (Today)\t140\t60\t94\t2.8\n2026-03-30 (Today)\t146\t60\t109\t2.93\n2026-03-30 (Today)\t152\t60\t126\t3.07\n2026-03-30 (Today)\t158\t60\t145\t3.22\n2026-03-30 (Today)\t164\t60\t167\t3.36\n2026-03-30 (Today)\t170\t60\t190\t3.5\n2026-03-30 (Today)\t122\t70\t67\t2.52\n2026-03-30 (Today)\t128\t70\t80\t2.65\n2026-03-30 (Today)\t134\t70\t94\t2.8\n2026-03-30 (Today)\t140\t70\t110\t2.94\n2026-03-30 (Today)\t146\t70\t127\t3.08\n2026-03-30 (Today)\t152\t70\t147\t3.23\n2026-03-30 (Today)\t158\t70\t169\t3.37\n2026-03-30 (Today)\t164\t70\t194\t3.52\n2026-03-30 (Today)\t170\t70\t222\t3.66\n2026-03-30 (Today)\t122\t80\t77\t2.62\n2026-03-30 (Today)\t128\t80\t91\t2.77\n2026-03-30 (Today)\t134\t80\t107\t2.92\n2026-03-30 (Today)\t140\t80\t125\t3.07\n2026-03-30 (Today)\t146\t80\t145\t3.22\n2026-03-30 (Today)\t152\t80\t168\t3.37\n2026-03-30 (Today)\t158\t80\t194\t3.51\n2026-03-30 (Today)\t164\t80\t222\t3.66\n2026-03-30 (Today)\t170\t80\t254\t3.79\n2026-03-30 (Today)\t122\t90\t87\t2.72\n2026-03-30 (Today)\t128\t90\t103\t2.88\n2026-03-30 (Today)\t134\t90\t121\t3.03\n2026-03-30 (Today)\t140\t90\t141\t3.19\n2026-03-30 (Today)\t146\t90\t164\t3.34\n2026-03-30 (Today)\t152\t90\t189\t3.49\n2026-03-30 (Today)\t158\t90\t218\t3.64\n2026-03-30 (Today)\t164\t90\t250\t3.78\n2026-03-30 (Today)\t170\t90\t286\t3.92\n2026-03-31 (Tomorrow)\t122\t30\t29\t1.86\n2026-03-31 (Tomorrow)\t128\t30\t34\t1.95\n2026-03-31 (Tomorrow)\t134\t30\t40\t2.04\n2026-03-31 (Tomorrow)\t140\t30\t47\t2.14\n2026-03-31 (Tomorrow)\t146\t30\t55\t2.25\n2026-03-31 (Tomorrow)\t152\t30\t63\t2.36\n2026-03-31 (Tomorrow)\t158\t30\t73\t2.47\n2026-03-31 (Tomorrow)\t164\t30\t83\t2.59\n2026-03-31 (Tomorrow)\t170\t30\t95\t2.72\n2026-03-31 (Tomorrow)\t122\t40\t39\t2.02\n2026-03-31 (Tomorrow)\t128\t40\t46\t2.12\n2026-03-31 (Tomorrow)\t134\t40\t54\t2.23\n2026-03-31 (Tomorrow)\t140\t40\t63\t2.35\n2026-03-31 (Tomorrow)\t146\t40\t73\t2.47\n2026-03-31 (Tomorrow)\t152\t40\t84\t2.6\n2026-03-31 (Tomorrow)\t158\t40\t97\t2.73\n2026-03-31 (Tomorrow)\t164\t40\t111\t2.87\n2026-03-31 (Tomorrow)\t170\t40\t127\t3\n2026-03-31 (Tomorrow)\t122\t50\t48\t2.16\n2026-03-31 (Tomorrow)\t128\t50\t57\t2.28\n2026-03-31 (Tomorrow)\t134\t50\t67\t2.41\n2026-03-31 (Tomorrow)\t140\t50\t78\t2.54\n2026-03-31 (Tomorrow)\t146\t50\t91\t2.67\n2026-03-31 (Tomorrow)\t152\t50\t105\t2.81\n2026-03-31 (Tomorrow)\t158\t50\t121\t2.95\n2026-03-31 (Tomorrow)\t164\t50\t139\t3.1\n2026-03-31 (Tomorrow)\t170\t50\t159\t3.24\n2026-03-31 (Tomorrow)\t122\t60\t58\t2.29\n2026-03-31 (Tomorrow)\t128\t60\t68\t2.42\n2026-03-31 (Tomorrow)\t134\t60\t80\t2.56\n2026-03-31 (Tomorrow)\t140\t60\t94\t2.7\n2026-03-31 (Tomorrow)\t146\t60\t109\t2.85\n2026-03-31 (Tomorrow)\t152\t60\t126\t3\n2026-03-31 (Tomorrow)\t158\t60\t145\t3.14\n2026-03-31 (Tomorrow)\t164\t60\t167\t3.29\n2026-03-31 (Tomorrow)\t170\t60\t190\t3.43\n2026-03-31 (Tomorrow)\t122\t70\t67\t2.41\n2026-03-31 (Tomorrow)\t128\t70\t80\t2.56\n2026-03-31 (Tomorrow)\t134\t70\t94\t2.7\n2026-03-31 (Tomorrow)\t140\t70\t110\t2.85\n2026-03-31 (Tomorrow)\t146\t70\t127\t3.01\n2026-03-31 (Tomorrow)\t152\t70\t147\t3.16\n2026-03-31 (Tomorrow)\t158\t70\t169\t3.31\n2026-03-31 (Tomorrow)\t164\t70\t194\t3.46\n2026-03-31 (Tomorrow)\t170\t70\t222\t3.6\n2026-03-31 (Tomorrow)\t122\t80\t77\t2.52\n2026-03-31 (Tomorrow)\t128\t80\t91\t2.68\n2026-03-31 (Tomorrow)\t134\t80\t107\t2.83\n2026-03-31 (Tomorrow)\t140\t80\t125\t2.99\n2026-03-31 (Tomorrow)\t146\t80\t145\t3.15\n2026-03-31 (Tomorrow)\t152\t80\t168\t3.3\n2026-03-31 (Tomorrow)\t158\t80\t194\t3.45\n2026-03-31 (Tomorrow)\t164\t80\t222\t3.6\n2026-03-31 (Tomorrow)\t170\t80\t254\t3.75\n2026-03-31 (Tomorrow)\t122\t90\t87\t2.63\n2026-03-31 (Tomorrow)\t128\t90\t103\t2.79\n2026-03-31 (Tomorrow)\t134\t90\t121\t2.95\n2026-03-31 (Tomorrow)\t140\t90\t141\t3.11\n2026-03-31 (Tomorrow)\t146\t90\t164\t3.27\n2026-03-31 (Tomorrow)\t152\t90\t189\t3.43\n2026-03-31 (Tomorrow)\t158\t90\t218\t3.58\n2026-03-31 (Tomorrow)\t164\t90\t250\t3.73\n2026-03-31 (Tomorrow)\t170\t90\t286\t3.87\n2026-04-01 (The day after tomorrow)\t122\t30\t29\t1.75\n2026-04-01 (The day after tomorrow)\t128\t30\t34\t1.84\n2026-04-01 (The day after tomorrow)\t134\t30\t40\t1.94\n2026-04-01 (The day after tomorrow)\t140\t30\t47\t2.04\n2026-04-01 (The day after tomorrow)\t146\t30\t55\t2.15\n2026-04-01 (The day after tomorrow)\t152\t30\t63\t2.26\n2026-04-01 (The day after tomorrow)\t158\t30\t73\t2.39\n2026-04-01 (The day after tomorrow)\t164\t30\t83\t2.51\n2026-04-01 (The day after tomorrow)\t170\t30\t95\t2.64\n2026-04-01 (The day after tomorrow)\t122\t40\t39\t1.91\n2026-04-01 (The day after tomorrow)\t128\t40\t46\t2.02\n2026-04-01 (The day after tomorrow)\t134\t40\t54\t2.14\n2026-04-01 (The day after tomorrow)\t140\t40\t63\t2.26\n2026-04-01 (The day after tomorrow)\t146\t40\t73\t2.39\n2026-04-01 (The day after tomorrow)\t152\t40\t84\t2.52\n2026-04-01 (The day after tomorrow)\t158\t40\t97\t2.66\n2026-04-01 (The day after tomorrow)\t164\t40\t111\t2.8\n2026-04-01 (The day after tomorrow)\t170\t40\t127\t2.94\n2026-04-01 (The day after tomorrow)\t122\t50\t48\t2.06\n2026-04-01 (The day after tomorrow)\t128\t50\t57\t2.18\n2026-04-01 (The day after tomorrow)\t134\t50\t67\t2.32\n2026-04-01 (The day after tomorrow)\t140\t50\t78\t2.45\n2026-04-01 (The day after tomorrow)\t146\t50\t91\t2.6\n2026-04-01 (The day after tomorrow)\t152\t50\t105\t2.74\n2026-04-01 (The day after tomorrow)\t158\t50\t121\t2.89\n2026-04-01 (The day after tomorrow)\t164\t50\t139\t3.03\n2026-04-01 (The day after tomorrow)\t170\t50\t159\t3.18\n2026-04-01 (The day after tomorrow)\t122\t60\t58\t2.19\n2026-04-01 (The day after tomorrow)\t128\t60\t68\t2.33\n2026-04-01 (The day after tomorrow)\t134\t60\t80\t2.48\n2026-04-01 (The day after tomorrow)\t140\t60\t94\t2.63\n2026-04-01 (The day after tomorrow)\t146\t60\t109\t2.78\n2026-04-01 (The day after tomorrow)\t152\t60\t126\t2.93\n2026-04-01 (The day after tomorrow)\t158\t60\t145\t3.08\n2026-04-01 (The day after tomorrow)\t164\t60\t167\t3.24\n2026-04-01 (The day after tomorrow)\t170\t60\t190\t3.39\n2026-04-01 (The day after tomorrow)\t122\t70\t67\t2.32\n2026-04-01 (The day after tomorrow)\t128\t70\t80\t2.47\n2026-04-01 (The day after tomorrow)\t134\t70\t94\t2.63\n2026-04-01 (The day after tomorrow)\t140\t70\t110\t2.78\n2026-04-01 (The day after tomorrow)\t146\t70\t127\t2.94\n2026-04-01 (The day after tomorrow)\t152\t70\t147\t3.1\n2026-04-01 (The day after tomorrow)\t158\t70\t169\t3.26\n2026-04-01 (The day after tomorrow)\t164\t70\t194\t3.41\n2026-04-01 (The day after tomorrow)\t170\t70\t222\t3.56\n2026-04-01 (The day after tomorrow)\t122\t80\t77\t2.44\n2026-04-01 (The day after tomorrow)\t128\t80\t91\t2.6\n2026-04-01 (The day after tomorrow)\t134\t80\t107\t2.76\n2026-04-01 (The day after tomorrow)\t140\t80\t125\t2.92\n2026-04-01 (The day after tomorrow)\t146\t80\t145\t3.09\n2026-04-01 (The day after tomorrow)\t152\t80\t168\t3.25\n2026-04-01 (The day after tomorrow)\t158\t80\t194\t3.4\n2026-04-01 (The day after tomorrow)\t164\t80\t222\t3.56\n2026-04-01 (The day after tomorrow)\t170\t80\t254\t3.71\n2026-04-01 (The day after tomorrow)\t122\t90\t87\t2.55\n2026-04-01 (The day after tomorrow)\t128\t90\t103\t2.72\n2026-04-01 (The day after tomorrow)\t134\t90\t121\t2.88\n2026-04-01 (The day after tomorrow)\t140\t90\t141\t3.05\n2026-04-01 (The day after tomorrow)\t146\t90\t164\t3.22\n2026-04-01 (The day after tomorrow)\t152\t90\t189\t3.38\n2026-04-01 (The day after tomorrow)\t158\t90\t218\t3.54\n2026-04-01 (The day after tomorrow)\t164\t90\t250\t3.69\n2026-04-01 (The day after tomorrow)\t170\t90\t286\t3.84\n\nHere is a summary of last training session:\n\nid\tdate\tvariable\tpct_10\tpct_20\tpct_30\tpct_40\tpct_50\tpct_60\tpct_70\tpct_80\tpct_90\tpct_100\nLast Run\t2026-03-30\ttime_seconds\t119 s\t118 s\t118 s\t204 s\t118 s\t118 s\t130 s\t140 s\t144 s\t193 s\nLast Run\t2026-03-30\tdistance_meters\t202 m\t320 m\t162 m\t286 m\t159 m\t292 m\t165 m\t284 m\t237 m\t194 m\nLast Run\t2026-03-30\thr_avg\t115 bpm\t137 bpm\t128 bpm\t129 bpm\t117 bpm\t138 bpm\t129 bpm\t147 bpm\t124 bpm\t127 bpm\nLast Run\t2026-03-30\thr_max\t134 bpm\t149 bpm\t149 bpm\t144 bpm\t135 bpm\t152 bpm\t153 bpm\t156 bpm\t150 bpm\t151 bpm\nLast Run\t2026-03-30\tpct_in_hr1\t100%\t36%\t76%\t70%\t100%\t33%\t64%\t8%\t74%\t48%\nLast Run\t2026-03-30\tpct_in_hr2\t0%\t59%\t13%\t30%\t0%\t45%\t21%\t50%\t22%\t35%\nLast Run\t2026-03-30\tpct_in_hr3\t0%\t5%\t11%\t0%\t0%\t22%\t14%\t42%\t4%\t17%\nLast Run\t2026-03-30\tpct_in_hr4\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\nLast Run\t2026-03-30\tpct_in_hr5\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\nLast Run\t2026-03-30\tspeed\t10:10 min/km\t6:10 min/km\t11:54 min/km\t7:15 min/km\t12:38 min/km\t6:40 min/km\t12:21 min/km\t7:07 min/km\t8:33 min/km\t10:17 min/km";
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand("copy"); } catch(e) {}
+  document.body.removeChild(ta);
+  window.open("https://claude.ai/new", "_blank");
+}
+</script>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container" style="padding: 0px;">
+<div style="padding: 8px;" class="html-fill-item html-fill-container">
+<p><button onclick="copyAndOpen2()" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'" style="width:100%; height:100%; cursor:pointer;
+           background: linear-gradient(135deg, #ff7b2c, #9b1a0a);
+           color:white; border:none; border-radius:4px; padding:8px; font-size:0.8rem;"> Workout Suggestion </button></p>
+</div>
+<script>
+function copyAndOpen2() {
+  var text = "Today is Monday Mar 30.\nYesterday was Sunday Mar 29.\nThe day before yesterday was Saturday Mar 28.\nTomorrow is Tuesday Mar 31.\nThe day after tomorrow is Wednesday Apr 1.\nCurrent time (Belgium, CET/CEST): 2026-03-30 23:11:52.\n\n================================================================================\nROLE\n================================================================================\nYou are a data-driven sport scientist and endurance coach working with a single\nathlete. Your job is to deliver a precise, evidence-based analysis. Analyse\ncritically and without bias. Do not soften conclusions. Be concise but specific\n— no generic advice, no filler.\n\n================================================================================\nATHLETE PROFILE\n================================================================================\nSex: Female | Age: 31\nWeight: 60 kg | Height: 164 cm\nMax HR: 187 bpm | Resting HR: 59 bpm\n\n================================================================================\nHEART RATE ZONES ← DO NOT RECALCULATE\n================================================================================\nZ1: 123–136 bpm   (very light / active recovery)\nZ2: 136–149 bpm   (aerobic base)\nZ3: 149–161 bpm   (tempo)\nZ4: 161–174 bpm   (threshold)\nZ5: 174+ bpm            (VO2max / neuromuscular)\n\n================================================================================\nTRAINING CONTEXT\n================================================================================\nPrimary goal: improve general endurance and HR efficiency across all three sports\n\nIndoor cycling FTP (Zwift, indoor only): 201 W\nOutdoor cycling FTP: no power meter → use HR + speed as proxies\n\nInjury constraint — HALLUX RIGIDUS (right foot, chronic):\n  - Degenerative joint disease of the right big toe; limits dorsiflexion\n  - Running load MUST be progressive and conservative\n  - Avoid explosive toe-off, steep hills, hard surfaces when fatigued\n  - Err on the side of doing less, not more, for running volume\n\nActivity type clarification — WALK:\n  - A brisk, purposeful walk targeting Z1–Z2 HR (NOT a casual stroll)\n  - Used as a low-mechanical-load aerobic stimulus: engages the aerobic energy\n    system and keeps running-related muscles and tendons active between run days\n  - Minimal stress on the hallux rigidus compared to running\n  - Count it as a legitimate training session for aerobic base and load\n  - Do NOT treat walks as running days\n  - Do NOT treat walks as rest days or ignore them in fatigue calculations\n  \nActivity type clarification — INDOOR:\n  - Indoor cycling session using Zwift/MyWoosh\n  - Used as an alternative to outdoor cycling\n  - General seasonal rule:\n      - March–October: outdoor cycling is priority\n      - November–February: indoor (Zwift) cycling is priority\n  - Do NOT recommend RIDE / INDOOR outside respective seasons\n\n================================================================================\nSCHEDULE CONSTRAINTS ← HARD RULES\n================================================================================\nPer calendar week (monday through sunday):\n  - Max 3 run sessions\n  - Max 2 brisk walk sessions\n  - Max 4 sum of run and brisk walk sessions\n  - Max 2 cycling/indoor sessions\n  - Max 1 swim session  (only possible to swim on Tuesday, Thursday, Friday; but dont force a swim just because it is Tuesday, Thursday or Friday)\n\nOnly one swimming session is possible, do not dwell on it. It is non-negotionable.\nNo swimming other than on Tuesday, Thursday or Friday, do not dwell on it. It is non-negotionable.\n\nRolling 7-day window:\n  - Max 5 training sessions total ← CRITICAL, never exceed\n\nSport spacing:\n  - At least 2 days between sessions of the same sport type ← CRITICAL, never back-to-back\n\nRotation principle:\n  - Distribute across run, ride, and swim where possible\n  - E.g. run -> ride/indoor -> swim -> run or run -> swim -> ride/indoor -> run\n  - Walk can occur enywhere in between (even two days in a row)\n  - No run after a walk (but a walk after a run is possible)\n  - Avoid stacking the same sport on consecutive days\n\n================================================================================\nDATASETS  (pasted inline below)\n================================================================================\nYou will receive 4 datasets:\n\nDATASET 1 — WORKOUT LOG\nMost recent 25 sessions per sport type.\nColumns: Date | Sport | Distance | Time | Speed | Trimp | Heartrate | Z1(%) | Z2(%) | Z3(%) | Z4(%) | Z5(%)\n\nSport values: Run, Ride, Swim, Indoor, Walk\n  - Indoor = Zwift indoor cycling (see context above)\n  - Walk = brisk Z1–Z2 aerobic walk (see context above)\n\n---\n\nDATASET 2 — DAILY TRAINING LOAD\nColumns: date | time(s) | ATL | CTL | ACWR | trimp\n\n---\n\nDATASET 3 — EXPECTED TRIMP / ACWR LOOKUP TABLE\nProjected values for different HR × duration combinations for today and\nupcoming days. Use this to calibrate session recommendations.\nColumns: date | avg_hr | time_min | expected_trimp | expected_acwr\n\n---\n\nDATASET 4 — LAST WORKOUT SESSION\nSummary of last workout, used for post-workout analysis, with splits per decile.\nColumns: id(sport type) | date | variable | pct_10 | pct_20 | pct_30 | pct_40 | pct_50 | pct_60 | pct_70 | pct_80 | pct_90 | pct_100\nVariable values include: time_seconds, distance_meters, hr_avg, hr_max, pct_in_hr1, pct_in_hr2, pct_in_hr3, pct_in_hr4, pct_in_hr5, speed (format depending on sport type)\n\n================================================================================\nTRIMP FORMULA (reference)\n================================================================================\nTRIMP = duration_min × HRr × 0.64 × e^(1.92 × HRr)\n  where HRr = (HR_avg − HR_rest) / (HR_max − HR_rest)\n\n================================================================================\nACWR THRESHOLDS  ← ABSOLUTE, DO NOT REINTERPRET\n================================================================================\n< 0.80 → detraining / underloading\n0.80–1.30 → optimal training zone\n1.30–1.50 → elevated fatigue risk\n> 1.50 → high injury / overtraining risk\n\n================================================================================\nANALYSIS RULES\n================================================================================\n- Focus on patterns and trends, not individual sessions\n- Ignore truly trivial entries in the DAILY TRAINING LOAD DATASET (e.g. sub-10-min Apple Watch auto-detects with no meaningful HR data); do NOT ignore walks that show real Z1–Z2 HR data\n- Primary lens: last 7 / 14 / 28 days; anchor to longer baseline where relevant\n- Be critical when the data warrants it\n- Be optimistic when the data allows it\n- Do NOT narrate your reasoning process\n- Do NOT recalculate zones or ACWR thresholds\n\n================================================================================\nTIMING RULE FOR RECOMMENDATION\n================================================================================\nAdress dates/time absolutely correct:\nCurrent Belgium date and time is given at the top of this prompt.\nBe sure that when mentioning \"yesterday\" this means the current date minus 1.\nBe sure that when mentioning \"today\" this means the current date.\nBe sure that when mentioning \"tomorrow\" this means the current date plus 1.\nApply this to all datasets shared with you.\n\n- If a structured workout is already recorded TODAY in Dataset 1 → Recommend for TOMORROW; use tomorrow's starting ACWR from Dataset 2\n- If current time > 20:00 Belgium AND no workout recorded today → Recommend for TOMORROW; use tomorrow's starting ACWR from Dataset 2\n- Otherwise → Recommend for TODAY\n\nDo NOT assume rest is required just because no session is logged yet today.\nDo NOT assume rest is required just because a non-zero TRIMP is logged today (this may be non-structured activity; check with Dataset 1).\nDo NOT assume a workout is possible tomorrow if it is not possible today.\nBase the recommendation on load, fatigue, and trends.\n\n================================================================================\nVISUALIZATION COLOR SCHEME\n================================================================================\nWhen visualizing, I use the following color-coding:\n  Run    = #e91e8c\n  Walk   = #c9a7e0\n  Ride   = #f9c8a0\n  Indoor = #4f8fff\n  Swim   = #a8e86e\n  \nFor all other visualizations, use a nice blue palette color scheme.\n\n================================================================================\nOUTPUT  (follow this structure exactly; use these headings)\n================================================================================\nGIVE ONLY THE FOLLOWING OUTPUT (IN ORDER).\nNEVER REPORT YOUR THINKING PROCESS/PREPARATIONS LEADING UP TO ONE THE FOLLOWING OUPUT REQUESTS.\n\n## 1. Next Session Recommendation\nSummary/conclusion as subtitle: state TODAY/TOMORROW | Sport | Duration | Intensity | Purpose\n\n- Match session to current fatigue + ACWR + injury risk\n- Use the expected TRIMP/ACWR dataset as a point of reference\n- Avoid repeating the dominant recent stimulus\n\nSession types available:\n  Recovery | Aerobic base | Long slow distance | Tempo/threshold |\n  VO2max intervals | Neuromuscular (sprints/strides) |\n  Technique (swim) | Mixed aerobic + accelerations |\n  Brisk walk (Z1–Z2, low-impact aerobic)\n\nInclude clear and simple instructions and exact duration (min) and hr (bpm), not a range.\nAssume I have never received instructions for this sport type selection before.\n\nIMPORTANT! Consider the selected workout type versus other activity types.\nIf the selected sport is contraindicated by load or injury, explicitly state why,\nthen recommend the most appropriate alternative workout or rest given\nthe current context. Do not default to a lighter version of the selected sport —\nmake a genuine substitution if warranted.\n\nInclude WHY this session is appropriate given the current load context.\nWhen stating a post-session ACWR, you MUST quote the exact row from Dataset 3 used: \ndate | avg_hr | time_min | expected_acwr. No interpolation, no rounding in this part.\nIf no exact row matches the recommendation, pick the nearest row and state it is approximate.\nSession duration and target HR must match an existing row in Dataset 3. Do not recommend combinations that fall between rows.\nBefore finalising the ACWR figure, re-read the exact Dataset 3 row one more time and confirm it matches the recommended duration and HR exactly.\nMax two paragraphs, 2-4 sentences (depending on need) each, limit amount of numbers.\nEnd with an insightful, but simple infographic (limit amount of text) that helps me remember the workout plan.\nShare a PNG file of this infographic in a size optimized for iPhone 12 Mini screen (exactly 680×1360 pixels) with dark theme and filename \"current_plan.png\".\nTriple check that all numbers and dates are correct.\nDouble check that everything is readable on the PNG.\n\n## 2. Next Session Nutritional Advice  *(only if NO structured workout of the selected activity type was done TODAY or YESTERDAY; see timing rule)*\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nProvide information about what to eat/drink leading up to the workout, during the workout and immediately after the workout.\nTiming, macros, and purpose — not generic advice.\nDo not talk numbers, talk general directions.\nNicely structured, max 2 sentences (depending on need) per part, one paragraph, limit amount of numbers.\n\n## 3. The session after the next session  *(only if a structured workout was suggested for TODAY or TOMORROW)*\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nIf a structured workout was suggested earlier for TODAY or for TOMORROW, then also discuss what workout options I have for the day after that suggested workout.\nOnly if scheduling rule allows it.\nOnly if time rule allows it.\n- Match that additional suggested session to the expected fatigue + ACWR + injury risk after the initial suggested session\n- Use the expected TRIMP/ACWR dataset as a point of reference\n- Avoid repeating the dominant recent stimulus\nDo a thourough calculation based on the lookup-table in Dataset 3 but calculate the new ACWR value based on another workout added.\nMax one paragraphs, 2-4 sentences (depending on need), limit amount of numbers.\n\n## 4. Summary for post-workout analysis prompt\nSummarize the analysis from part 1 in 3 short sentences (1 paragraph) to be used by me in another prompt.\nStart the summary with: \"In an earlier analysis, you recommended ...\".\nMake it so that I can easily copy-paste this summary in another prompt (e.g. like a code block).\n\n\n================================================================================\nTONE\n================================================================================\nDirect. Precise. Calm. Challenge weak patterns without drama or insults. Be\npositive, but no cheerleading. No filler sentences. Very simple English\ntargeting a non-English speaker. Every claim must be absolutely traceable to\nthe data (!!!).\n\n================================================================================\nSTART\n================================================================================\nAlways (!) start with these check-in questions with interactive multiple choice:\n- Which sport type (Run, Walk, Ride, Indoor, Swimming, not sure/you decide) do you want to discuss?\n- To what extent do you feel tired/fatigued?\n- Any current health condition (minor cold, hallux rigidus, muscle soreness, other) I should be aware of?\n- Which training recommendation did you (the AI) give earlier (general fitness, local event, other)?\nUse this info in your analysis!\n\nHere is the data structure and the dataset:\n\ndate\ttype\tdistance\ttime\thr\thr_max\tspeed\tpace\ttrimp\n2026-03-30 (Today)\tRun\t2260\t1173\t131\t156\t6.9\t8.65\t24\n2026-03-28 (The day before yesterday)\tNo structured workout\tNA\tNA\tNA\tNA\tNA\tNA\tNA\n2026-03-29 (Yesterday)\tNo structured workout\tNA\tNA\tNA\tNA\tNA\tNA\tNA\n\nHere is an overview of my 6-week training load:\n\ndate\tstatus\ttrimp\ttime\tATL\tCTL\tACWR\n2026-02-16\tRest day\t0\t0\t3\t3\t1.18\n2026-02-17\tRest day\t0\t0\t3\t2\t1.05\n2026-02-18\tRest day\t0\t0\t2\t2\t0.93\n2026-02-19\tRest day\t26\t1636\t5\t3\t1.82\n2026-02-20\tRest day\t0\t0\t5\t3\t1.62\n2026-02-21\tRest day\t0\t0\t4\t3\t1.43\n2026-02-22\tRest day\t0\t0\t4\t3\t1.27\n2026-02-23\tRest day\t0\t0\t3\t3\t1.13\n2026-02-24\tRest day\t4\t365\t3\t3\t1.17\n2026-02-25\tRest day\t15\t743\t5\t3\t1.57\n2026-02-26\tRest day\t21\t748\t7\t3\t2\n2026-02-27\tRest day\t0\t0\t6\t3\t1.77\n2026-02-28\tRest day\t0\t0\t5\t3\t1.57\n2026-03-01\tRest day\t0\t0\t5\t3\t1.4\n2026-03-02\tRest day\t0\t0\t4\t3\t1.24\n2026-03-03\tRest day\t0\t0\t3\t3\t1.1\n2026-03-04\tRest day\t19\t1995\t6\t3\t1.6\n2026-03-05\tRest day\t20\t1134\t7\t4\t1.94\n2026-03-06\tRest day\t19\t876\t9\t4\t2.14\n2026-03-07\tRest day\t0\t0\t8\t4\t1.9\n2026-03-08\tRest day\t0\t0\t7\t4\t1.69\n2026-03-09\tRest day\t0\t0\t6\t4\t1.5\n2026-03-10\tRest day\t0\t0\t5\t4\t1.33\n2026-03-11\tRest day\t0\t0\t4\t4\t1.18\n2026-03-12\tRest day\t27\t934\t7\t4\t1.73\n2026-03-13\tRest day\t0\t0\t6\t4\t1.54\n2026-03-14\tRest day\t11\t1843\t7\t4\t1.62\n2026-03-15\tRest day\t8\t1133\t7\t4\t1.62\n2026-03-16\tRest day\t0\t0\t6\t4\t1.44\n2026-03-17\tRest day\t11\t549\t7\t4\t1.53\n2026-03-18\tRest day\t0\t0\t6\t4\t1.36\n2026-03-19\tRest day\t0\t0\t5\t4\t1.21\n2026-03-20\tRest day\t24\t1187\t8\t5\t1.62\n2026-03-21\tRest day\t0\t0\t7\t5\t1.44\n2026-03-22\tRest day\t0\t0\t6\t5\t1.28\n2026-03-23\tRest day\t0\t0\t5\t4\t1.14\n2026-03-24\tRest day\t0\t0\t4\t4\t1.01\n2026-03-25\tRest day\t0\t0\t4\t4\t0.9\n2026-03-26\tRest day\t0\t0\t3\t4\t0.79\n2026-03-27\tRest day\t16\t740\t5\t4\t1.13\n2026-03-28 (The day before yesterday)\tRest day\t7\t1025\t5\t4\t1.17\n2026-03-29 (Yesterday)\tRest day\t0\t0\t5\t4\t1.04\n2026-03-30 (Today)\tWorkout done\t24\t1173\t7\t5\t1.48\n2026-03-31 (Tomorrow)\tNo workout planned yet\t0\t0\t6\t5\t1.31\n2026-04-01 (The day after tomorrow)\tNo workout planned yet\t0\t0\t5\t5\t1.17\n\nHere is an overview of the expected trimp and ACWR values for different combinations of HR and time for today and the coming days:\n\ndate\tavg_hr\ttime_min\texpected_trimp\texpected_acwr\n2026-03-30 (Today)\t122\t30\t29\t2\n2026-03-30 (Today)\t128\t30\t34\t2.08\n2026-03-30 (Today)\t134\t30\t40\t2.17\n2026-03-30 (Today)\t140\t30\t47\t2.26\n2026-03-30 (Today)\t146\t30\t55\t2.36\n2026-03-30 (Today)\t152\t30\t63\t2.47\n2026-03-30 (Today)\t158\t30\t73\t2.58\n2026-03-30 (Today)\t164\t30\t83\t2.69\n2026-03-30 (Today)\t170\t30\t95\t2.81\n2026-03-30 (Today)\t122\t40\t39\t2.14\n2026-03-30 (Today)\t128\t40\t46\t2.24\n2026-03-30 (Today)\t134\t40\t54\t2.35\n2026-03-30 (Today)\t140\t40\t63\t2.46\n2026-03-30 (Today)\t146\t40\t73\t2.58\n2026-03-30 (Today)\t152\t40\t84\t2.7\n2026-03-30 (Today)\t158\t40\t97\t2.82\n2026-03-30 (Today)\t164\t40\t111\t2.95\n2026-03-30 (Today)\t170\t40\t127\t3.08\n2026-03-30 (Today)\t122\t50\t48\t2.28\n2026-03-30 (Today)\t128\t50\t57\t2.39\n2026-03-30 (Today)\t134\t50\t67\t2.51\n2026-03-30 (Today)\t140\t50\t78\t2.64\n2026-03-30 (Today)\t146\t50\t91\t2.77\n2026-03-30 (Today)\t152\t50\t105\t2.9\n2026-03-30 (Today)\t158\t50\t121\t3.03\n2026-03-30 (Today)\t164\t50\t139\t3.17\n2026-03-30 (Today)\t170\t50\t159\t3.31\n2026-03-30 (Today)\t122\t60\t58\t2.4\n2026-03-30 (Today)\t128\t60\t68\t2.53\n2026-03-30 (Today)\t134\t60\t80\t2.66\n2026-03-30 (Today)\t140\t60\t94\t2.8\n2026-03-30 (Today)\t146\t60\t109\t2.93\n2026-03-30 (Today)\t152\t60\t126\t3.07\n2026-03-30 (Today)\t158\t60\t145\t3.22\n2026-03-30 (Today)\t164\t60\t167\t3.36\n2026-03-30 (Today)\t170\t60\t190\t3.5\n2026-03-30 (Today)\t122\t70\t67\t2.52\n2026-03-30 (Today)\t128\t70\t80\t2.65\n2026-03-30 (Today)\t134\t70\t94\t2.8\n2026-03-30 (Today)\t140\t70\t110\t2.94\n2026-03-30 (Today)\t146\t70\t127\t3.08\n2026-03-30 (Today)\t152\t70\t147\t3.23\n2026-03-30 (Today)\t158\t70\t169\t3.37\n2026-03-30 (Today)\t164\t70\t194\t3.52\n2026-03-30 (Today)\t170\t70\t222\t3.66\n2026-03-30 (Today)\t122\t80\t77\t2.62\n2026-03-30 (Today)\t128\t80\t91\t2.77\n2026-03-30 (Today)\t134\t80\t107\t2.92\n2026-03-30 (Today)\t140\t80\t125\t3.07\n2026-03-30 (Today)\t146\t80\t145\t3.22\n2026-03-30 (Today)\t152\t80\t168\t3.37\n2026-03-30 (Today)\t158\t80\t194\t3.51\n2026-03-30 (Today)\t164\t80\t222\t3.66\n2026-03-30 (Today)\t170\t80\t254\t3.79\n2026-03-30 (Today)\t122\t90\t87\t2.72\n2026-03-30 (Today)\t128\t90\t103\t2.88\n2026-03-30 (Today)\t134\t90\t121\t3.03\n2026-03-30 (Today)\t140\t90\t141\t3.19\n2026-03-30 (Today)\t146\t90\t164\t3.34\n2026-03-30 (Today)\t152\t90\t189\t3.49\n2026-03-30 (Today)\t158\t90\t218\t3.64\n2026-03-30 (Today)\t164\t90\t250\t3.78\n2026-03-30 (Today)\t170\t90\t286\t3.92\n2026-03-31 (Tomorrow)\t122\t30\t29\t1.86\n2026-03-31 (Tomorrow)\t128\t30\t34\t1.95\n2026-03-31 (Tomorrow)\t134\t30\t40\t2.04\n2026-03-31 (Tomorrow)\t140\t30\t47\t2.14\n2026-03-31 (Tomorrow)\t146\t30\t55\t2.25\n2026-03-31 (Tomorrow)\t152\t30\t63\t2.36\n2026-03-31 (Tomorrow)\t158\t30\t73\t2.47\n2026-03-31 (Tomorrow)\t164\t30\t83\t2.59\n2026-03-31 (Tomorrow)\t170\t30\t95\t2.72\n2026-03-31 (Tomorrow)\t122\t40\t39\t2.02\n2026-03-31 (Tomorrow)\t128\t40\t46\t2.12\n2026-03-31 (Tomorrow)\t134\t40\t54\t2.23\n2026-03-31 (Tomorrow)\t140\t40\t63\t2.35\n2026-03-31 (Tomorrow)\t146\t40\t73\t2.47\n2026-03-31 (Tomorrow)\t152\t40\t84\t2.6\n2026-03-31 (Tomorrow)\t158\t40\t97\t2.73\n2026-03-31 (Tomorrow)\t164\t40\t111\t2.87\n2026-03-31 (Tomorrow)\t170\t40\t127\t3\n2026-03-31 (Tomorrow)\t122\t50\t48\t2.16\n2026-03-31 (Tomorrow)\t128\t50\t57\t2.28\n2026-03-31 (Tomorrow)\t134\t50\t67\t2.41\n2026-03-31 (Tomorrow)\t140\t50\t78\t2.54\n2026-03-31 (Tomorrow)\t146\t50\t91\t2.67\n2026-03-31 (Tomorrow)\t152\t50\t105\t2.81\n2026-03-31 (Tomorrow)\t158\t50\t121\t2.95\n2026-03-31 (Tomorrow)\t164\t50\t139\t3.1\n2026-03-31 (Tomorrow)\t170\t50\t159\t3.24\n2026-03-31 (Tomorrow)\t122\t60\t58\t2.29\n2026-03-31 (Tomorrow)\t128\t60\t68\t2.42\n2026-03-31 (Tomorrow)\t134\t60\t80\t2.56\n2026-03-31 (Tomorrow)\t140\t60\t94\t2.7\n2026-03-31 (Tomorrow)\t146\t60\t109\t2.85\n2026-03-31 (Tomorrow)\t152\t60\t126\t3\n2026-03-31 (Tomorrow)\t158\t60\t145\t3.14\n2026-03-31 (Tomorrow)\t164\t60\t167\t3.29\n2026-03-31 (Tomorrow)\t170\t60\t190\t3.43\n2026-03-31 (Tomorrow)\t122\t70\t67\t2.41\n2026-03-31 (Tomorrow)\t128\t70\t80\t2.56\n2026-03-31 (Tomorrow)\t134\t70\t94\t2.7\n2026-03-31 (Tomorrow)\t140\t70\t110\t2.85\n2026-03-31 (Tomorrow)\t146\t70\t127\t3.01\n2026-03-31 (Tomorrow)\t152\t70\t147\t3.16\n2026-03-31 (Tomorrow)\t158\t70\t169\t3.31\n2026-03-31 (Tomorrow)\t164\t70\t194\t3.46\n2026-03-31 (Tomorrow)\t170\t70\t222\t3.6\n2026-03-31 (Tomorrow)\t122\t80\t77\t2.52\n2026-03-31 (Tomorrow)\t128\t80\t91\t2.68\n2026-03-31 (Tomorrow)\t134\t80\t107\t2.83\n2026-03-31 (Tomorrow)\t140\t80\t125\t2.99\n2026-03-31 (Tomorrow)\t146\t80\t145\t3.15\n2026-03-31 (Tomorrow)\t152\t80\t168\t3.3\n2026-03-31 (Tomorrow)\t158\t80\t194\t3.45\n2026-03-31 (Tomorrow)\t164\t80\t222\t3.6\n2026-03-31 (Tomorrow)\t170\t80\t254\t3.75\n2026-03-31 (Tomorrow)\t122\t90\t87\t2.63\n2026-03-31 (Tomorrow)\t128\t90\t103\t2.79\n2026-03-31 (Tomorrow)\t134\t90\t121\t2.95\n2026-03-31 (Tomorrow)\t140\t90\t141\t3.11\n2026-03-31 (Tomorrow)\t146\t90\t164\t3.27\n2026-03-31 (Tomorrow)\t152\t90\t189\t3.43\n2026-03-31 (Tomorrow)\t158\t90\t218\t3.58\n2026-03-31 (Tomorrow)\t164\t90\t250\t3.73\n2026-03-31 (Tomorrow)\t170\t90\t286\t3.87\n2026-04-01 (The day after tomorrow)\t122\t30\t29\t1.75\n2026-04-01 (The day after tomorrow)\t128\t30\t34\t1.84\n2026-04-01 (The day after tomorrow)\t134\t30\t40\t1.94\n2026-04-01 (The day after tomorrow)\t140\t30\t47\t2.04\n2026-04-01 (The day after tomorrow)\t146\t30\t55\t2.15\n2026-04-01 (The day after tomorrow)\t152\t30\t63\t2.26\n2026-04-01 (The day after tomorrow)\t158\t30\t73\t2.39\n2026-04-01 (The day after tomorrow)\t164\t30\t83\t2.51\n2026-04-01 (The day after tomorrow)\t170\t30\t95\t2.64\n2026-04-01 (The day after tomorrow)\t122\t40\t39\t1.91\n2026-04-01 (The day after tomorrow)\t128\t40\t46\t2.02\n2026-04-01 (The day after tomorrow)\t134\t40\t54\t2.14\n2026-04-01 (The day after tomorrow)\t140\t40\t63\t2.26\n2026-04-01 (The day after tomorrow)\t146\t40\t73\t2.39\n2026-04-01 (The day after tomorrow)\t152\t40\t84\t2.52\n2026-04-01 (The day after tomorrow)\t158\t40\t97\t2.66\n2026-04-01 (The day after tomorrow)\t164\t40\t111\t2.8\n2026-04-01 (The day after tomorrow)\t170\t40\t127\t2.94\n2026-04-01 (The day after tomorrow)\t122\t50\t48\t2.06\n2026-04-01 (The day after tomorrow)\t128\t50\t57\t2.18\n2026-04-01 (The day after tomorrow)\t134\t50\t67\t2.32\n2026-04-01 (The day after tomorrow)\t140\t50\t78\t2.45\n2026-04-01 (The day after tomorrow)\t146\t50\t91\t2.6\n2026-04-01 (The day after tomorrow)\t152\t50\t105\t2.74\n2026-04-01 (The day after tomorrow)\t158\t50\t121\t2.89\n2026-04-01 (The day after tomorrow)\t164\t50\t139\t3.03\n2026-04-01 (The day after tomorrow)\t170\t50\t159\t3.18\n2026-04-01 (The day after tomorrow)\t122\t60\t58\t2.19\n2026-04-01 (The day after tomorrow)\t128\t60\t68\t2.33\n2026-04-01 (The day after tomorrow)\t134\t60\t80\t2.48\n2026-04-01 (The day after tomorrow)\t140\t60\t94\t2.63\n2026-04-01 (The day after tomorrow)\t146\t60\t109\t2.78\n2026-04-01 (The day after tomorrow)\t152\t60\t126\t2.93\n2026-04-01 (The day after tomorrow)\t158\t60\t145\t3.08\n2026-04-01 (The day after tomorrow)\t164\t60\t167\t3.24\n2026-04-01 (The day after tomorrow)\t170\t60\t190\t3.39\n2026-04-01 (The day after tomorrow)\t122\t70\t67\t2.32\n2026-04-01 (The day after tomorrow)\t128\t70\t80\t2.47\n2026-04-01 (The day after tomorrow)\t134\t70\t94\t2.63\n2026-04-01 (The day after tomorrow)\t140\t70\t110\t2.78\n2026-04-01 (The day after tomorrow)\t146\t70\t127\t2.94\n2026-04-01 (The day after tomorrow)\t152\t70\t147\t3.1\n2026-04-01 (The day after tomorrow)\t158\t70\t169\t3.26\n2026-04-01 (The day after tomorrow)\t164\t70\t194\t3.41\n2026-04-01 (The day after tomorrow)\t170\t70\t222\t3.56\n2026-04-01 (The day after tomorrow)\t122\t80\t77\t2.44\n2026-04-01 (The day after tomorrow)\t128\t80\t91\t2.6\n2026-04-01 (The day after tomorrow)\t134\t80\t107\t2.76\n2026-04-01 (The day after tomorrow)\t140\t80\t125\t2.92\n2026-04-01 (The day after tomorrow)\t146\t80\t145\t3.09\n2026-04-01 (The day after tomorrow)\t152\t80\t168\t3.25\n2026-04-01 (The day after tomorrow)\t158\t80\t194\t3.4\n2026-04-01 (The day after tomorrow)\t164\t80\t222\t3.56\n2026-04-01 (The day after tomorrow)\t170\t80\t254\t3.71\n2026-04-01 (The day after tomorrow)\t122\t90\t87\t2.55\n2026-04-01 (The day after tomorrow)\t128\t90\t103\t2.72\n2026-04-01 (The day after tomorrow)\t134\t90\t121\t2.88\n2026-04-01 (The day after tomorrow)\t140\t90\t141\t3.05\n2026-04-01 (The day after tomorrow)\t146\t90\t164\t3.22\n2026-04-01 (The day after tomorrow)\t152\t90\t189\t3.38\n2026-04-01 (The day after tomorrow)\t158\t90\t218\t3.54\n2026-04-01 (The day after tomorrow)\t164\t90\t250\t3.69\n2026-04-01 (The day after tomorrow)\t170\t90\t286\t3.84\n\nHere is a summary of last training session:\n\nid\tdate\tvariable\tpct_10\tpct_20\tpct_30\tpct_40\tpct_50\tpct_60\tpct_70\tpct_80\tpct_90\tpct_100\nLast Run\t2026-03-30\ttime_seconds\t119 s\t118 s\t118 s\t204 s\t118 s\t118 s\t130 s\t140 s\t144 s\t193 s\nLast Run\t2026-03-30\tdistance_meters\t202 m\t320 m\t162 m\t286 m\t159 m\t292 m\t165 m\t284 m\t237 m\t194 m\nLast Run\t2026-03-30\thr_avg\t115 bpm\t137 bpm\t128 bpm\t129 bpm\t117 bpm\t138 bpm\t129 bpm\t147 bpm\t124 bpm\t127 bpm\nLast Run\t2026-03-30\thr_max\t134 bpm\t149 bpm\t149 bpm\t144 bpm\t135 bpm\t152 bpm\t153 bpm\t156 bpm\t150 bpm\t151 bpm\nLast Run\t2026-03-30\tpct_in_hr1\t100%\t36%\t76%\t70%\t100%\t33%\t64%\t8%\t74%\t48%\nLast Run\t2026-03-30\tpct_in_hr2\t0%\t59%\t13%\t30%\t0%\t45%\t21%\t50%\t22%\t35%\nLast Run\t2026-03-30\tpct_in_hr3\t0%\t5%\t11%\t0%\t0%\t22%\t14%\t42%\t4%\t17%\nLast Run\t2026-03-30\tpct_in_hr4\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\nLast Run\t2026-03-30\tpct_in_hr5\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\nLast Run\t2026-03-30\tspeed\t10:10 min/km\t6:10 min/km\t11:54 min/km\t7:15 min/km\t12:38 min/km\t6:40 min/km\t12:21 min/km\t7:07 min/km\t8:33 min/km\t10:17 min/km";
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand("copy"); } catch(e) {}
+  document.body.removeChild(ta);
+  window.open("https://claude.ai/new", "_blank");
+}
+</script>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container" style="padding: 0px;">
+<div style="padding: 8px;" class="html-fill-item html-fill-container">
+<p><button onclick="copyAndOpen3()" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'" style="width:100%; height:100%; cursor:pointer;
+           background: linear-gradient(135deg, #ff7b2c, #9b1a0a);
+           color:white; border:none; border-radius:4px; padding:8px; font-size:0.8rem;"> Post-Workout Analysis </button></p>
+</div>
+<script>
+function copyAndOpen3() {
+  var text = "Today is Monday Mar 30.\nYesterday was Sunday Mar 29.\nThe day before yesterday was Saturday Mar 28.\nTomorrow is Tuesday Mar 31.\nThe day after tomorrow is Wednesday Apr 1.\nCurrent time (Belgium, CET/CEST): 2026-03-30 23:11:52.\n\n================================================================================\nROLE\n================================================================================\nYou are a data-driven sport scientist and endurance coach working with a single\nathlete. Your job is to deliver a precise, evidence-based analysis. Analyse\ncritically and without bias. Do not soften conclusions. Be concise but specific\n— no generic advice, no filler.\n\n================================================================================\nATHLETE PROFILE\n================================================================================\nSex: Female | Age: 31\nWeight: 60 kg | Height: 164 cm\nMax HR: 187 bpm | Resting HR: 59 bpm\n\n================================================================================\nHEART RATE ZONES ← DO NOT RECALCULATE\n================================================================================\nZ1: 123–136 bpm   (very light / active recovery)\nZ2: 136–149 bpm   (aerobic base)\nZ3: 149–161 bpm   (tempo)\nZ4: 161–174 bpm   (threshold)\nZ5: 174+ bpm            (VO2max / neuromuscular)\n\n================================================================================\nTRAINING CONTEXT\n================================================================================\nPrimary goal: improve general endurance and HR efficiency across all three sports\n\nIndoor cycling FTP (Zwift, indoor only): 201 W\nOutdoor cycling FTP: no power meter → use HR + speed as proxies\n\nInjury constraint — HALLUX RIGIDUS (right foot, chronic):\n  - Degenerative joint disease of the right big toe; limits dorsiflexion\n  - Running load MUST be progressive and conservative\n  - Avoid explosive toe-off, steep hills, hard surfaces when fatigued\n  - Err on the side of doing less, not more, for running volume\n\nActivity type clarification — WALK:\n  - A brisk, purposeful walk targeting Z1–Z2 HR (NOT a casual stroll)\n  - Used as a low-mechanical-load aerobic stimulus: engages the aerobic energy\n    system and keeps running-related muscles and tendons active between run days\n  - Minimal stress on the hallux rigidus compared to running\n  - Count it as a legitimate training session for aerobic base and load\n  - Do NOT treat walks as running days\n  - Do NOT treat walks as rest days or ignore them in fatigue calculations\n  \nActivity type clarification — INDOOR:\n  - Indoor cycling session using Zwift/MyWoosh\n  - Used as an alternative to outdoor cycling\n  - General seasonal rule:\n      - March–October: outdoor cycling is priority\n      - November–February: indoor (Zwift) cycling is priority\n  - Do NOT recommend RIDE / INDOOR outside respective seasons\n\n================================================================================\nSCHEDULE CONSTRAINTS ← HARD RULES\n================================================================================\nPer calendar week (monday through sunday):\n  - Max 3 run sessions\n  - Max 2 brisk walk sessions\n  - Max 4 sum of run and brisk walk sessions\n  - Max 2 cycling/indoor sessions\n  - Max 1 swim session  (only possible to swim on Tuesday, Thursday, Friday; but dont force a swim just because it is Tuesday, Thursday or Friday)\n\nOnly one swimming session is possible, do not dwell on it. It is non-negotionable.\nNo swimming other than on Tuesday, Thursday or Friday, do not dwell on it. It is non-negotionable.\n\nRolling 7-day window:\n  - Max 5 training sessions total ← CRITICAL, never exceed\n\nSport spacing:\n  - At least 2 days between sessions of the same sport type ← CRITICAL, never back-to-back\n\nRotation principle:\n  - Distribute across run, ride, and swim where possible\n  - E.g. run -> ride/indoor -> swim -> run or run -> swim -> ride/indoor -> run\n  - Walk can occur enywhere in between (even two days in a row)\n  - No run after a walk (but a walk after a run is possible)\n  - Avoid stacking the same sport on consecutive days\n\n================================================================================\nDATASETS  (pasted inline below)\n================================================================================\nYou will receive 4 datasets:\n\nDATASET 1 — WORKOUT LOG\nMost recent 25 sessions per sport type.\nColumns: Date | Sport | Distance | Time | Speed | Trimp | Heartrate | Z1(%) | Z2(%) | Z3(%) | Z4(%) | Z5(%)\n\nSport values: Run, Ride, Swim, Indoor, Walk\n  - Indoor = Zwift indoor cycling (see context above)\n  - Walk = brisk Z1–Z2 aerobic walk (see context above)\n\n---\n\nDATASET 2 — DAILY TRAINING LOAD\nColumns: date | time(s) | ATL | CTL | ACWR | trimp\n\n---\n\nDATASET 3 — EXPECTED TRIMP / ACWR LOOKUP TABLE\nProjected values for different HR × duration combinations for today and\nupcoming days. Use this to calibrate session recommendations.\nColumns: date | avg_hr | time_min | expected_trimp | expected_acwr\n\n---\n\nDATASET 4 — LAST WORKOUT SESSION\nSummary of last workout, used for post-workout analysis, with splits per decile.\nColumns: id(sport type) | date | variable | pct_10 | pct_20 | pct_30 | pct_40 | pct_50 | pct_60 | pct_70 | pct_80 | pct_90 | pct_100\nVariable values include: time_seconds, distance_meters, hr_avg, hr_max, pct_in_hr1, pct_in_hr2, pct_in_hr3, pct_in_hr4, pct_in_hr5, speed (format depending on sport type)\n\n================================================================================\nTRIMP FORMULA (reference)\n================================================================================\nTRIMP = duration_min × HRr × 0.64 × e^(1.92 × HRr)\n  where HRr = (HR_avg − HR_rest) / (HR_max − HR_rest)\n\n================================================================================\nACWR THRESHOLDS  ← ABSOLUTE, DO NOT REINTERPRET\n================================================================================\n< 0.80 → detraining / underloading\n0.80–1.30 → optimal training zone\n1.30–1.50 → elevated fatigue risk\n> 1.50 → high injury / overtraining risk\n\n================================================================================\nANALYSIS RULES\n================================================================================\n- Focus on patterns and trends, not individual sessions\n- Ignore truly trivial entries in the DAILY TRAINING LOAD DATASET (e.g. sub-10-min Apple Watch auto-detects with no meaningful HR data); do NOT ignore walks that show real Z1–Z2 HR data\n- Primary lens: last 7 / 14 / 28 days; anchor to longer baseline where relevant\n- Be critical when the data warrants it\n- Be optimistic when the data allows it\n- Do NOT narrate your reasoning process\n- Do NOT recalculate zones or ACWR thresholds\n\n================================================================================\nTIMING RULE FOR RECOMMENDATION\n================================================================================\nAdress dates/time absolutely correct:\nCurrent Belgium date and time is given at the top of this prompt.\nBe sure that when mentioning \"yesterday\" this means the current date minus 1.\nBe sure that when mentioning \"today\" this means the current date.\nBe sure that when mentioning \"tomorrow\" this means the current date plus 1.\nApply this to all datasets shared with you.\n\n- If a structured workout is already recorded TODAY in Dataset 1 → Recommend for TOMORROW; use tomorrow's starting ACWR from Dataset 2\n- If current time > 20:00 Belgium AND no workout recorded today → Recommend for TOMORROW; use tomorrow's starting ACWR from Dataset 2\n- Otherwise → Recommend for TODAY\n\nDo NOT assume rest is required just because no session is logged yet today.\nDo NOT assume rest is required just because a non-zero TRIMP is logged today (this may be non-structured activity; check with Dataset 1).\nDo NOT assume a workout is possible tomorrow if it is not possible today.\nBase the recommendation on load, fatigue, and trends.\n\n================================================================================\nVISUALIZATION COLOR SCHEME\n================================================================================\nWhen visualizing, I use the following color-coding:\n  Run    = #e91e8c\n  Walk   = #c9a7e0\n  Ride   = #f9c8a0\n  Indoor = #4f8fff\n  Swim   = #a8e86e\n  \nFor all other visualizations, use a nice blue palette color scheme.\n\n================================================================================\nOUTPUT  (follow this structure exactly; use these headings)\n================================================================================\nGIVE ONLY THE FOLLOWING OUTPUT (IN ORDER).\nNEVER REPORT YOUR THINKING PROCESS/PREPARATIONS LEADING UP TO ONE THE FOLLOWING OUPUT REQUESTS.\n\n## 1. Comprehensive Post-Workout Analysis\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nBriefly describe the overall performance of the last workout (based on Dataset 4).\nHow would you describe this workout compared to other workouts in the past?\nHow should the athlete feel right now (fatigue, muscle groups, HR recovery)?\nDid the workout align well with the training recommendation earlier given by the AI?\nMax 2-4 sentences (depending on need), one paragraph, limit amount of numbers.\nEnd with an insightful graph when it reveals something that prose cannot convey clearly.\n\n## 2. Post-Workout Stretches\nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nSuggest a short but effective stretch routine that can be done 30 minutes after the workout.\nAlso guide me towards cooling down my body after this workout for the remainder of the day until bedtime\nMax 2-4 SHORT sentences (depending on need), one paragraph, limit amount of numbers.\n\n## 3. Post-workout nutrition (brief, specific): \nSummary/conclusion as subtitle in 4-5 words (Be realistic, stay positive, do not humble me).\nTiming, macros, and purpose — not generic advice.\nDo not talk numbers, talk general directions.\nMax 2-4 SHORT sentences (depending on need), one paragraph, limit amount of numbers.\n\n================================================================================\nTONE\n================================================================================\nDirect. Precise. Calm. Challenge weak patterns without drama or insults. Be\npositive, but no cheerleading. No filler sentences. Very simple English\ntargeting a non-English speaker. Every claim must be absolutely traceable to\nthe data (!!!).\n\n================================================================================\nSTART\n================================================================================\nAlways (!) start with these check-in questions with interactive multiple choice:\n- How did the workout feel?\n- Which physical problems occured during/after the workout?\n- Which workout recommendation did you (the AI) give earlier (general fitness, local event, other)?\nUse this info in your analysis!\n\nHere is the data structure and the dataset:\n\ndate\ttype\tdistance\ttime\thr\thr_max\tspeed\tpace\ttrimp\n2026-03-30 (Today)\tRun\t2260\t1173\t131\t156\t6.9\t8.65\t24\n2026-03-28 (The day before yesterday)\tNo structured workout\tNA\tNA\tNA\tNA\tNA\tNA\tNA\n2026-03-29 (Yesterday)\tNo structured workout\tNA\tNA\tNA\tNA\tNA\tNA\tNA\n\nHere is an overview of my 6-week training load:\n\ndate\tstatus\ttrimp\ttime\tATL\tCTL\tACWR\n2026-02-16\tRest day\t0\t0\t3\t3\t1.18\n2026-02-17\tRest day\t0\t0\t3\t2\t1.05\n2026-02-18\tRest day\t0\t0\t2\t2\t0.93\n2026-02-19\tRest day\t26\t1636\t5\t3\t1.82\n2026-02-20\tRest day\t0\t0\t5\t3\t1.62\n2026-02-21\tRest day\t0\t0\t4\t3\t1.43\n2026-02-22\tRest day\t0\t0\t4\t3\t1.27\n2026-02-23\tRest day\t0\t0\t3\t3\t1.13\n2026-02-24\tRest day\t4\t365\t3\t3\t1.17\n2026-02-25\tRest day\t15\t743\t5\t3\t1.57\n2026-02-26\tRest day\t21\t748\t7\t3\t2\n2026-02-27\tRest day\t0\t0\t6\t3\t1.77\n2026-02-28\tRest day\t0\t0\t5\t3\t1.57\n2026-03-01\tRest day\t0\t0\t5\t3\t1.4\n2026-03-02\tRest day\t0\t0\t4\t3\t1.24\n2026-03-03\tRest day\t0\t0\t3\t3\t1.1\n2026-03-04\tRest day\t19\t1995\t6\t3\t1.6\n2026-03-05\tRest day\t20\t1134\t7\t4\t1.94\n2026-03-06\tRest day\t19\t876\t9\t4\t2.14\n2026-03-07\tRest day\t0\t0\t8\t4\t1.9\n2026-03-08\tRest day\t0\t0\t7\t4\t1.69\n2026-03-09\tRest day\t0\t0\t6\t4\t1.5\n2026-03-10\tRest day\t0\t0\t5\t4\t1.33\n2026-03-11\tRest day\t0\t0\t4\t4\t1.18\n2026-03-12\tRest day\t27\t934\t7\t4\t1.73\n2026-03-13\tRest day\t0\t0\t6\t4\t1.54\n2026-03-14\tRest day\t11\t1843\t7\t4\t1.62\n2026-03-15\tRest day\t8\t1133\t7\t4\t1.62\n2026-03-16\tRest day\t0\t0\t6\t4\t1.44\n2026-03-17\tRest day\t11\t549\t7\t4\t1.53\n2026-03-18\tRest day\t0\t0\t6\t4\t1.36\n2026-03-19\tRest day\t0\t0\t5\t4\t1.21\n2026-03-20\tRest day\t24\t1187\t8\t5\t1.62\n2026-03-21\tRest day\t0\t0\t7\t5\t1.44\n2026-03-22\tRest day\t0\t0\t6\t5\t1.28\n2026-03-23\tRest day\t0\t0\t5\t4\t1.14\n2026-03-24\tRest day\t0\t0\t4\t4\t1.01\n2026-03-25\tRest day\t0\t0\t4\t4\t0.9\n2026-03-26\tRest day\t0\t0\t3\t4\t0.79\n2026-03-27\tRest day\t16\t740\t5\t4\t1.13\n2026-03-28 (The day before yesterday)\tRest day\t7\t1025\t5\t4\t1.17\n2026-03-29 (Yesterday)\tRest day\t0\t0\t5\t4\t1.04\n2026-03-30 (Today)\tWorkout done\t24\t1173\t7\t5\t1.48\n2026-03-31 (Tomorrow)\tNo workout planned yet\t0\t0\t6\t5\t1.31\n2026-04-01 (The day after tomorrow)\tNo workout planned yet\t0\t0\t5\t5\t1.17\n\nHere is an overview of the expected trimp and ACWR values for different combinations of HR and time for today and the coming days:\n\ndate\tavg_hr\ttime_min\texpected_trimp\texpected_acwr\n2026-03-30 (Today)\t122\t30\t29\t2\n2026-03-30 (Today)\t128\t30\t34\t2.08\n2026-03-30 (Today)\t134\t30\t40\t2.17\n2026-03-30 (Today)\t140\t30\t47\t2.26\n2026-03-30 (Today)\t146\t30\t55\t2.36\n2026-03-30 (Today)\t152\t30\t63\t2.47\n2026-03-30 (Today)\t158\t30\t73\t2.58\n2026-03-30 (Today)\t164\t30\t83\t2.69\n2026-03-30 (Today)\t170\t30\t95\t2.81\n2026-03-30 (Today)\t122\t40\t39\t2.14\n2026-03-30 (Today)\t128\t40\t46\t2.24\n2026-03-30 (Today)\t134\t40\t54\t2.35\n2026-03-30 (Today)\t140\t40\t63\t2.46\n2026-03-30 (Today)\t146\t40\t73\t2.58\n2026-03-30 (Today)\t152\t40\t84\t2.7\n2026-03-30 (Today)\t158\t40\t97\t2.82\n2026-03-30 (Today)\t164\t40\t111\t2.95\n2026-03-30 (Today)\t170\t40\t127\t3.08\n2026-03-30 (Today)\t122\t50\t48\t2.28\n2026-03-30 (Today)\t128\t50\t57\t2.39\n2026-03-30 (Today)\t134\t50\t67\t2.51\n2026-03-30 (Today)\t140\t50\t78\t2.64\n2026-03-30 (Today)\t146\t50\t91\t2.77\n2026-03-30 (Today)\t152\t50\t105\t2.9\n2026-03-30 (Today)\t158\t50\t121\t3.03\n2026-03-30 (Today)\t164\t50\t139\t3.17\n2026-03-30 (Today)\t170\t50\t159\t3.31\n2026-03-30 (Today)\t122\t60\t58\t2.4\n2026-03-30 (Today)\t128\t60\t68\t2.53\n2026-03-30 (Today)\t134\t60\t80\t2.66\n2026-03-30 (Today)\t140\t60\t94\t2.8\n2026-03-30 (Today)\t146\t60\t109\t2.93\n2026-03-30 (Today)\t152\t60\t126\t3.07\n2026-03-30 (Today)\t158\t60\t145\t3.22\n2026-03-30 (Today)\t164\t60\t167\t3.36\n2026-03-30 (Today)\t170\t60\t190\t3.5\n2026-03-30 (Today)\t122\t70\t67\t2.52\n2026-03-30 (Today)\t128\t70\t80\t2.65\n2026-03-30 (Today)\t134\t70\t94\t2.8\n2026-03-30 (Today)\t140\t70\t110\t2.94\n2026-03-30 (Today)\t146\t70\t127\t3.08\n2026-03-30 (Today)\t152\t70\t147\t3.23\n2026-03-30 (Today)\t158\t70\t169\t3.37\n2026-03-30 (Today)\t164\t70\t194\t3.52\n2026-03-30 (Today)\t170\t70\t222\t3.66\n2026-03-30 (Today)\t122\t80\t77\t2.62\n2026-03-30 (Today)\t128\t80\t91\t2.77\n2026-03-30 (Today)\t134\t80\t107\t2.92\n2026-03-30 (Today)\t140\t80\t125\t3.07\n2026-03-30 (Today)\t146\t80\t145\t3.22\n2026-03-30 (Today)\t152\t80\t168\t3.37\n2026-03-30 (Today)\t158\t80\t194\t3.51\n2026-03-30 (Today)\t164\t80\t222\t3.66\n2026-03-30 (Today)\t170\t80\t254\t3.79\n2026-03-30 (Today)\t122\t90\t87\t2.72\n2026-03-30 (Today)\t128\t90\t103\t2.88\n2026-03-30 (Today)\t134\t90\t121\t3.03\n2026-03-30 (Today)\t140\t90\t141\t3.19\n2026-03-30 (Today)\t146\t90\t164\t3.34\n2026-03-30 (Today)\t152\t90\t189\t3.49\n2026-03-30 (Today)\t158\t90\t218\t3.64\n2026-03-30 (Today)\t164\t90\t250\t3.78\n2026-03-30 (Today)\t170\t90\t286\t3.92\n2026-03-31 (Tomorrow)\t122\t30\t29\t1.86\n2026-03-31 (Tomorrow)\t128\t30\t34\t1.95\n2026-03-31 (Tomorrow)\t134\t30\t40\t2.04\n2026-03-31 (Tomorrow)\t140\t30\t47\t2.14\n2026-03-31 (Tomorrow)\t146\t30\t55\t2.25\n2026-03-31 (Tomorrow)\t152\t30\t63\t2.36\n2026-03-31 (Tomorrow)\t158\t30\t73\t2.47\n2026-03-31 (Tomorrow)\t164\t30\t83\t2.59\n2026-03-31 (Tomorrow)\t170\t30\t95\t2.72\n2026-03-31 (Tomorrow)\t122\t40\t39\t2.02\n2026-03-31 (Tomorrow)\t128\t40\t46\t2.12\n2026-03-31 (Tomorrow)\t134\t40\t54\t2.23\n2026-03-31 (Tomorrow)\t140\t40\t63\t2.35\n2026-03-31 (Tomorrow)\t146\t40\t73\t2.47\n2026-03-31 (Tomorrow)\t152\t40\t84\t2.6\n2026-03-31 (Tomorrow)\t158\t40\t97\t2.73\n2026-03-31 (Tomorrow)\t164\t40\t111\t2.87\n2026-03-31 (Tomorrow)\t170\t40\t127\t3\n2026-03-31 (Tomorrow)\t122\t50\t48\t2.16\n2026-03-31 (Tomorrow)\t128\t50\t57\t2.28\n2026-03-31 (Tomorrow)\t134\t50\t67\t2.41\n2026-03-31 (Tomorrow)\t140\t50\t78\t2.54\n2026-03-31 (Tomorrow)\t146\t50\t91\t2.67\n2026-03-31 (Tomorrow)\t152\t50\t105\t2.81\n2026-03-31 (Tomorrow)\t158\t50\t121\t2.95\n2026-03-31 (Tomorrow)\t164\t50\t139\t3.1\n2026-03-31 (Tomorrow)\t170\t50\t159\t3.24\n2026-03-31 (Tomorrow)\t122\t60\t58\t2.29\n2026-03-31 (Tomorrow)\t128\t60\t68\t2.42\n2026-03-31 (Tomorrow)\t134\t60\t80\t2.56\n2026-03-31 (Tomorrow)\t140\t60\t94\t2.7\n2026-03-31 (Tomorrow)\t146\t60\t109\t2.85\n2026-03-31 (Tomorrow)\t152\t60\t126\t3\n2026-03-31 (Tomorrow)\t158\t60\t145\t3.14\n2026-03-31 (Tomorrow)\t164\t60\t167\t3.29\n2026-03-31 (Tomorrow)\t170\t60\t190\t3.43\n2026-03-31 (Tomorrow)\t122\t70\t67\t2.41\n2026-03-31 (Tomorrow)\t128\t70\t80\t2.56\n2026-03-31 (Tomorrow)\t134\t70\t94\t2.7\n2026-03-31 (Tomorrow)\t140\t70\t110\t2.85\n2026-03-31 (Tomorrow)\t146\t70\t127\t3.01\n2026-03-31 (Tomorrow)\t152\t70\t147\t3.16\n2026-03-31 (Tomorrow)\t158\t70\t169\t3.31\n2026-03-31 (Tomorrow)\t164\t70\t194\t3.46\n2026-03-31 (Tomorrow)\t170\t70\t222\t3.6\n2026-03-31 (Tomorrow)\t122\t80\t77\t2.52\n2026-03-31 (Tomorrow)\t128\t80\t91\t2.68\n2026-03-31 (Tomorrow)\t134\t80\t107\t2.83\n2026-03-31 (Tomorrow)\t140\t80\t125\t2.99\n2026-03-31 (Tomorrow)\t146\t80\t145\t3.15\n2026-03-31 (Tomorrow)\t152\t80\t168\t3.3\n2026-03-31 (Tomorrow)\t158\t80\t194\t3.45\n2026-03-31 (Tomorrow)\t164\t80\t222\t3.6\n2026-03-31 (Tomorrow)\t170\t80\t254\t3.75\n2026-03-31 (Tomorrow)\t122\t90\t87\t2.63\n2026-03-31 (Tomorrow)\t128\t90\t103\t2.79\n2026-03-31 (Tomorrow)\t134\t90\t121\t2.95\n2026-03-31 (Tomorrow)\t140\t90\t141\t3.11\n2026-03-31 (Tomorrow)\t146\t90\t164\t3.27\n2026-03-31 (Tomorrow)\t152\t90\t189\t3.43\n2026-03-31 (Tomorrow)\t158\t90\t218\t3.58\n2026-03-31 (Tomorrow)\t164\t90\t250\t3.73\n2026-03-31 (Tomorrow)\t170\t90\t286\t3.87\n2026-04-01 (The day after tomorrow)\t122\t30\t29\t1.75\n2026-04-01 (The day after tomorrow)\t128\t30\t34\t1.84\n2026-04-01 (The day after tomorrow)\t134\t30\t40\t1.94\n2026-04-01 (The day after tomorrow)\t140\t30\t47\t2.04\n2026-04-01 (The day after tomorrow)\t146\t30\t55\t2.15\n2026-04-01 (The day after tomorrow)\t152\t30\t63\t2.26\n2026-04-01 (The day after tomorrow)\t158\t30\t73\t2.39\n2026-04-01 (The day after tomorrow)\t164\t30\t83\t2.51\n2026-04-01 (The day after tomorrow)\t170\t30\t95\t2.64\n2026-04-01 (The day after tomorrow)\t122\t40\t39\t1.91\n2026-04-01 (The day after tomorrow)\t128\t40\t46\t2.02\n2026-04-01 (The day after tomorrow)\t134\t40\t54\t2.14\n2026-04-01 (The day after tomorrow)\t140\t40\t63\t2.26\n2026-04-01 (The day after tomorrow)\t146\t40\t73\t2.39\n2026-04-01 (The day after tomorrow)\t152\t40\t84\t2.52\n2026-04-01 (The day after tomorrow)\t158\t40\t97\t2.66\n2026-04-01 (The day after tomorrow)\t164\t40\t111\t2.8\n2026-04-01 (The day after tomorrow)\t170\t40\t127\t2.94\n2026-04-01 (The day after tomorrow)\t122\t50\t48\t2.06\n2026-04-01 (The day after tomorrow)\t128\t50\t57\t2.18\n2026-04-01 (The day after tomorrow)\t134\t50\t67\t2.32\n2026-04-01 (The day after tomorrow)\t140\t50\t78\t2.45\n2026-04-01 (The day after tomorrow)\t146\t50\t91\t2.6\n2026-04-01 (The day after tomorrow)\t152\t50\t105\t2.74\n2026-04-01 (The day after tomorrow)\t158\t50\t121\t2.89\n2026-04-01 (The day after tomorrow)\t164\t50\t139\t3.03\n2026-04-01 (The day after tomorrow)\t170\t50\t159\t3.18\n2026-04-01 (The day after tomorrow)\t122\t60\t58\t2.19\n2026-04-01 (The day after tomorrow)\t128\t60\t68\t2.33\n2026-04-01 (The day after tomorrow)\t134\t60\t80\t2.48\n2026-04-01 (The day after tomorrow)\t140\t60\t94\t2.63\n2026-04-01 (The day after tomorrow)\t146\t60\t109\t2.78\n2026-04-01 (The day after tomorrow)\t152\t60\t126\t2.93\n2026-04-01 (The day after tomorrow)\t158\t60\t145\t3.08\n2026-04-01 (The day after tomorrow)\t164\t60\t167\t3.24\n2026-04-01 (The day after tomorrow)\t170\t60\t190\t3.39\n2026-04-01 (The day after tomorrow)\t122\t70\t67\t2.32\n2026-04-01 (The day after tomorrow)\t128\t70\t80\t2.47\n2026-04-01 (The day after tomorrow)\t134\t70\t94\t2.63\n2026-04-01 (The day after tomorrow)\t140\t70\t110\t2.78\n2026-04-01 (The day after tomorrow)\t146\t70\t127\t2.94\n2026-04-01 (The day after tomorrow)\t152\t70\t147\t3.1\n2026-04-01 (The day after tomorrow)\t158\t70\t169\t3.26\n2026-04-01 (The day after tomorrow)\t164\t70\t194\t3.41\n2026-04-01 (The day after tomorrow)\t170\t70\t222\t3.56\n2026-04-01 (The day after tomorrow)\t122\t80\t77\t2.44\n2026-04-01 (The day after tomorrow)\t128\t80\t91\t2.6\n2026-04-01 (The day after tomorrow)\t134\t80\t107\t2.76\n2026-04-01 (The day after tomorrow)\t140\t80\t125\t2.92\n2026-04-01 (The day after tomorrow)\t146\t80\t145\t3.09\n2026-04-01 (The day after tomorrow)\t152\t80\t168\t3.25\n2026-04-01 (The day after tomorrow)\t158\t80\t194\t3.4\n2026-04-01 (The day after tomorrow)\t164\t80\t222\t3.56\n2026-04-01 (The day after tomorrow)\t170\t80\t254\t3.71\n2026-04-01 (The day after tomorrow)\t122\t90\t87\t2.55\n2026-04-01 (The day after tomorrow)\t128\t90\t103\t2.72\n2026-04-01 (The day after tomorrow)\t134\t90\t121\t2.88\n2026-04-01 (The day after tomorrow)\t140\t90\t141\t3.05\n2026-04-01 (The day after tomorrow)\t146\t90\t164\t3.22\n2026-04-01 (The day after tomorrow)\t152\t90\t189\t3.38\n2026-04-01 (The day after tomorrow)\t158\t90\t218\t3.54\n2026-04-01 (The day after tomorrow)\t164\t90\t250\t3.69\n2026-04-01 (The day after tomorrow)\t170\t90\t286\t3.84\n\nHere is a summary of last training session:\n\nid\tdate\tvariable\tpct_10\tpct_20\tpct_30\tpct_40\tpct_50\tpct_60\tpct_70\tpct_80\tpct_90\tpct_100\nLast Run\t2026-03-30\ttime_seconds\t119 s\t118 s\t118 s\t204 s\t118 s\t118 s\t130 s\t140 s\t144 s\t193 s\nLast Run\t2026-03-30\tdistance_meters\t202 m\t320 m\t162 m\t286 m\t159 m\t292 m\t165 m\t284 m\t237 m\t194 m\nLast Run\t2026-03-30\thr_avg\t115 bpm\t137 bpm\t128 bpm\t129 bpm\t117 bpm\t138 bpm\t129 bpm\t147 bpm\t124 bpm\t127 bpm\nLast Run\t2026-03-30\thr_max\t134 bpm\t149 bpm\t149 bpm\t144 bpm\t135 bpm\t152 bpm\t153 bpm\t156 bpm\t150 bpm\t151 bpm\nLast Run\t2026-03-30\tpct_in_hr1\t100%\t36%\t76%\t70%\t100%\t33%\t64%\t8%\t74%\t48%\nLast Run\t2026-03-30\tpct_in_hr2\t0%\t59%\t13%\t30%\t0%\t45%\t21%\t50%\t22%\t35%\nLast Run\t2026-03-30\tpct_in_hr3\t0%\t5%\t11%\t0%\t0%\t22%\t14%\t42%\t4%\t17%\nLast Run\t2026-03-30\tpct_in_hr4\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\nLast Run\t2026-03-30\tpct_in_hr5\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\t0%\nLast Run\t2026-03-30\tspeed\t10:10 min/km\t6:10 min/km\t11:54 min/km\t7:15 min/km\t12:38 min/km\t6:40 min/km\t12:21 min/km\t7:07 min/km\t8:33 min/km\t10:17 min/km";
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand("copy"); } catch(e) {}
+  document.body.removeChild(ta);
+  window.open("https://claude.ai/new", "_blank");
+}
+</script>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-acafc1e4ddd0b38d2e2c" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-acafc1e4ddd0b38d2e2c">{"x":{"visdat":{"1a9814b41507":["function () ","plotlyVisDat"]},"cur_data":"1a9814b41507","attrs":{"1a9814b41507":{"x":{},"y":{},"showlegend":false,"marker":{"color":{},"size":12.5,"line":{"color":"black","width":1}},"text":{},"hoverinfo":"text","textposition":"none","opacity":0.96999999999999997,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":0,"l":0,"t":0,"r":0},"annotations":[{"x":0.5,"y":1,"xref":"paper","yref":"paper","align":"right","xanchor":"center","yanchor":"top","text":"Activities (7 days)","showarrow":false,"font":{"color":"white","size":11}},{"x":0.5,"y":1,"xref":"paper","yref":"paper","align":"right","xanchor":"center","yanchor":"top","text":"Activities (7 days)","showarrow":false,"font":{"color":"white","size":11}}],"hoverlabel":{"align":"left"},"paper_bgcolor":"#2d2d2d","barmode":"stack","plot_bgcolor":"#2d2d2d","yaxis":{"domain":[0,1],"automargin":true,"tickfont":{"size":10,"color":"white"},"title":null,"visible":false,"showticklabels":true,"ticks":"","fixedrange":true,"range":[0,32.663813496484075],"side":"top","gridcolor":"#2d2d2d","gridwidth":0.050000000000000003},"xaxis":{"domain":[0,1],"automargin":true,"tickvals":["2026-03-30","2026-03-27","2026-03-28","2026-03-24","2026-03-25","2026-03-26","2026-03-29"],"ticktext":["Mon","Fri","Sat","Tue","Wed","Thu","Sun"],"tickfont":{"size":8,"color":"white"},"title":null,"visible":true,"showticklabels":true,"ticks":"","tickmode":"array","fixedrange":true,"gridcolor":null,"gridwidth":0.25},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":false,"staticPlot":false},"data":[{"x":["2026-03-30","2026-03-27","2026-03-28","2026-03-24","2026-03-25","2026-03-26","2026-03-29"],"y":[24.195417404803017,16.102689593354878,6.6091603208458807,0,0,0,0],"showlegend":false,"marker":{"color":["#e91e8c","#4d4d4d","#4d4d4d","#00000000","#00000000","#00000000","#00000000"],"size":12.5,"line":{"color":"black","width":1}},"text":["<b>Run<\/b><br>Monday 30/03/26<\/b><br>Distance: 2.3 km<br>Time: 20 min<br>HR: 131 bpm<br>TRIMP: 24","<b>Other<\/b><br>Friday 27/03/26<\/b><br>Distance: 0 km<br>Time: 12 min<br>HR: 133 bpm<br>TRIMP: 16","<b>Other<\/b><br>Saturday 28/03/26<\/b><br>Distance: 0 km<br>Time: 17 min<br>HR: 95 bpm<br>TRIMP: 7","<b>None<\/b><br>Tuesday 24/03/26<\/b><br>Distance: 0 km<br>Time: 0 min<br>HR: 0 bpm<br>TRIMP: 0","<b>None<\/b><br>Wednesday 25/03/26<\/b><br>Distance: 0 km<br>Time: 0 min<br>HR: 0 bpm<br>TRIMP: 0","<b>None<\/b><br>Thursday 26/03/26<\/b><br>Distance: 0 km<br>Time: 0 min<br>HR: 0 bpm<br>TRIMP: 0","<b>None<\/b><br>Sunday 29/03/26<\/b><br>Distance: 0 km<br>Time: 0 min<br>HR: 0 bpm<br>TRIMP: 0"],"hoverinfo":["text","text","text","text","text","text","text"],"textposition":["none","none","none","none","none","none","none"],"opacity":0.96999999999999997,"type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="plotly html-widget html-fill-item html-fill-container" id="htmlwidget-46ccade7f87d0848b7b1" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-46ccade7f87d0848b7b1">{"x":{"visdat":{"1a982999dfa1":["function () ","plotlyVisDat"]},"cur_data":"1a982999dfa1","attrs":{"1a982999dfa1":{"x":{},"y":{},"showlegend":false,"marker":{"line":{"color":"black","width":1}},"text":{},"hoverinfo":"text","textposition":"none","opacity":0.96999999999999997,"color":{},"colors":["#fcb9b2","#fcb9b2","#EB001B","#7A000C","#7A000C"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":0,"l":0,"t":0,"r":0},"annotations":[{"x":0.5,"y":1,"xref":"paper","yref":"paper","align":"right","xanchor":"center","yanchor":"top","text":"HR zones (48 days)","showarrow":false,"font":{"color":"white","size":11}},{"x":0.5,"y":0.94999999999999996,"xref":"paper","yref":"paper","align":"right","xanchor":"center","yanchor":"top","text":"<span style='margin:0 12px;'><span style='color:#fcb9b2; font-size:16px;'>&#x25A0;<\/span> <span style='color:white;'>Z1–Z2    <\/span><\/span><span style='margin:0 12px;'><span style='color:#EB001B; font-size:16px;'>&#x25A0;<\/span> <span style='color:white;'>Z3    <\/span><\/span><span style='margin:0 12px;'><span style='color:#7A000C; font-size:16px;'>&#x25A0;<\/span> <span style='color:white;'>Z4–Z5 <\/span><\/span>","showarrow":false,"font":{"color":"white","size":8}}],"hoverlabel":{"align":"left"},"paper_bgcolor":"#2d2d2d","barmode":"stack","plot_bgcolor":"#2d2d2d","xaxis":{"domain":[0,1],"automargin":true,"tickfont":{"size":8,"color":"white"},"title":null,"visible":true,"showticklabels":true,"ticks":"","fixedrange":true,"side":"bottom","gridcolor":"#2d2d2d","gridwidth":0.050000000000000003,"type":"category","categoryorder":"array","categoryarray":["Run","Walk","Ride","Indoor","Swim"]},"yaxis":{"domain":[0,1],"automargin":true,"visible":false,"showticklabels":true,"ticks":"","range":[0,1.25],"tickmode":"array","fixedrange":true,"gridcolor":null,"gridwidth":0.25,"title":"percentage"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":false,"staticPlot":false},"data":[{"x":["Run"],"y":[0.53780313837375182],"showlegend":false,"marker":{"color":"rgba(252,185,178,1)","line":{"color":"black","width":1}},"text":"<b>HR zone 1<\/b><br>Time: 13 min<\/b><br>Percentage: 54%","hoverinfo":"text","textposition":"none","opacity":0.96999999999999997,"type":"bar","name":"Z1","textfont":{"color":"rgba(252,185,178,1)"},"error_y":{"color":"rgba(252,185,178,1)"},"error_x":{"color":"rgba(252,185,178,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Run"],"y":[0.34878744650499288],"showlegend":false,"marker":{"color":"rgba(252,185,178,1)","line":{"color":"black","width":1}},"text":"<b>HR zone 2<\/b><br>Time: 8 min<\/b><br>Percentage: 35%","hoverinfo":"text","textposition":"none","opacity":0.96999999999999997,"type":"bar","name":"Z2","textfont":{"color":"rgba(252,185,178,1)"},"error_y":{"color":"rgba(252,185,178,1)"},"error_x":{"color":"rgba(252,185,178,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Run"],"y":[0.11340941512125535],"showlegend":false,"marker":{"color":"rgba(235,0,27,1)","line":{"color":"black","width":1}},"text":"<b>HR zone 3<\/b><br>Time: 3 min<\/b><br>Percentage: 11%","hoverinfo":"text","textposition":"none","opacity":0.96999999999999997,"type":"bar","name":"Z3","textfont":{"color":"rgba(235,0,27,1)"},"error_y":{"color":"rgba(235,0,27,1)"},"error_x":{"color":"rgba(235,0,27,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Run"],"y":[0],"showlegend":false,"marker":{"color":"rgba(122,0,12,1)","line":{"color":"black","width":1}},"text":"<b>HR zone 4<\/b><br>Time: 0 min<\/b><br>Percentage: 0%","hoverinfo":"text","textposition":"none","opacity":0.96999999999999997,"type":"bar","name":"Z4","textfont":{"color":"rgba(122,0,12,1)"},"error_y":{"color":"rgba(122,0,12,1)"},"error_x":{"color":"rgba(122,0,12,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Run"],"y":[0],"showlegend":false,"marker":{"color":"rgba(122,0,12,1)","line":{"color":"black","width":1}},"text":"<b>HR zone 5<\/b><br>Time: 0 min<\/b><br>Percentage: 0%","hoverinfo":"text","textposition":"none","opacity":0.96999999999999997,"type":"bar","name":"Z5","textfont":{"color":"rgba(122,0,12,1)"},"error_y":{"color":"rgba(122,0,12,1)"},"error_x":{"color":"rgba(122,0,12,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+
+
+<div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden">
+
+</div>
+</div>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
+
+
+
+</body></html>
